@@ -1,0 +1,66 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <title>Portafolio Angel Gabriel Ortega</title>
+</head>
+<body>
+    <Nav />
+
+
+    <div class="soloyo">
+      
+          <!-- begin section -->
+      
+          <div class="section" data-anchor="skills">
+            <div class="content">
+              <h1 class="wow fadeInDown" data-wow-delay="0.2s">ABOUT ME</h1>
+              <p class="wow fadeInDown" data-wow-delay="0.2s">Hi, I'm Brad Engelhardt! I'm a Silicon Valley based Web Designer & Front-end Developer focused on creating clean, responsive web designs!</p>
+              
+              <div class=" wow fadeInUp container-skillbar" data-wow-delay="0.2s">
+                <div class="skillbar clearfix " data-percent="90%">
+                  <div class="skillbar-title" style="background: #DD1E2F;"><span>HTML5</span></div>
+                  <div class="skillbar-bar" style="background: #DD1E2F;"></div>
+                  <div class="skill-bar-percent">90%</div>
+
+
+                  <div class="skillbar clearfix " data-percent="80%">
+                    <div class="skillbar-title" style="background: #EBB035;"><span>CSS3</span></div>
+                    <div class="skillbar-bar" style="background: #EBB035;"></div>
+                    <div class="skill-bar-percent">80%</div>
+                  </div>
+                </div> 
+
+               
+      </div>
+
+</div>
+
+
+<script>
+    $(".skillbar").each(function () {
+              $(this)
+                .find(".skillbar-bar")
+                .animate(
+                  {
+                    width: $(this).attr("data-percent")
+                  },
+                  2500
+                );
+            });
+    </script>
+    <Footer />
+    <script is:inline src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+</body>
+</html>
+
+
