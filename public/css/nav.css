@@ -1,10 +1,12 @@
+/* Estilos para la barra de navegación */
 nav {
     padding: 20px 148px;
-    background-color: #fff;
+    background-color: #344C64; /* Fondo azul claro */
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-weight: 600;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 nav .logo {
@@ -21,7 +23,7 @@ nav .logo img {
 
 nav .logo a {
     font-size: 15px;
-    color: #3e3e3e;
+    color: #ffffff; 
     font-weight: bold;
 }
 
@@ -31,10 +33,11 @@ nav .nav-links {
 }
 
 nav .nav-links a {
+    color: #ffffff; /* Color de los enlaces a blanco */
     transition: color 0.3s ease;
 }
 
 nav .nav-links a:hover,
 nav .nav-links a.selected {
-    color: #303f9f;
+    color: #91DDCF; 
 }
