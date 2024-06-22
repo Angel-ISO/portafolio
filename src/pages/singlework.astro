@@ -8,7 +8,8 @@ import Footer from '../components/Footer.astro';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/logo.png">
+    <link rel="stylesheet" href="/css/singlejobsec.css">
     <title>Portafolio Angel Gabriel Ortega</title>
 </head>
 <body>
@@ -16,104 +17,89 @@ import Footer from '../components/Footer.astro';
 
     <h1 class="page-title">Single Works Developed by me</h1>
 
-    <div class="content">
-        <div class="post-list">
-            <div class="post-item">
-                <h3>Making a layout system from scratch</h3>
-                <div class="info">
-                    <h5>12 Jan 2024</h5>
-                    <h5>|</h5>
-                    <h5>Design, Layout</h5>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet pariatur porro quaerat provident
-                    corporis facere ex voluptatibus laudantium voluptates quos.</p>
-
-                <div class="buttons">
-                    <i class='bx bx-share'></i>
-                    <i class='bx bx-link-alt'></i>
-                    <i class='bx bx-copy'></i>
-                    <i class='bx bx-bookmark-plus'></i>
-                    <button>Read More</button>
-                </div>
-
-            </div>
-            <div class="post-item">
-                <h3>Making a design system from scratch</h3>
-                <div class="info">
-                    <h5>5 Jan 2024</h5>
-                    <h5>|</h5>
-                    <h5>Design, UI, UX</h5>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet pariatur porro quaerat provident
-                    corporis facere ex voluptatibus laudantium voluptates quos.</p>
-                <div class="buttons">
-                    <i class='bx bx-share'></i>
-                    <i class='bx bx-link-alt'></i>
-                    <i class='bx bx-copy'></i>
-                    <i class='bx bx-bookmark-plus'></i>
-                    <button>Read More</button>
+    <div class="singleworks">
+        <div class="project-card" id="card1">
+            <img src="project-image.jpg" alt="Project Image" class="project-card__image">
+            <div class="project-card__content">
+                <h2 class="project-card__title">Project Name</h2>
+                <p class="project-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet metus nec diam facilisis pretium.</p>
+                <p class="project-card__technologies">Technologies: HTML, CSS, JavaScript</p>
+                <div class="project-card__links">
+                    <a href="https://github.com/username/repository" target="_blank" class="project-card__link">Source Code</a>
+                    <a href="https://live-demo-link.com" target="_blank" class="project-card__link project-card__link--live-demo">Live Demo</a>
                 </div>
             </div>
-
-            <div class="post-item">
-                <h3>Making a layout system from scratch</h3>
-                <div class="info">
-                    <h5>12 Jan 2024</h5>
-                    <h5>|</h5>
-                    <h5>Design, Layout</h5>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet pariatur porro quaerat provident
-                    corporis facere ex voluptatibus laudantium voluptates quos.</p>
-                <div class="buttons">
-                    <i class='bx bx-share'></i>
-                    <i class='bx bx-link-alt'></i>
-                    <i class='bx bx-copy'></i>
-                    <i class='bx bx-bookmark-plus'></i>
-                    <button>Read More</button>
-                </div>
-            </div>
-
-            <div class="post-item">
-                <h3>Making a layout system from scratch</h3>
-                <div class="info">
-                    <h5>12 Jan 2024</h5>
-                    <h5>|</h5>
-                    <h5>Design, Layout</h5>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet pariatur porro quaerat provident
-                    corporis facere ex voluptatibus laudantium voluptates quos.</p>
-                <div class="buttons">
-                    <i class='bx bx-share'></i>
-                    <i class='bx bx-link-alt'></i>
-                    <i class='bx bx-copy'></i>
-                    <i class='bx bx-bookmark-plus'></i>
-                    <button>Read More</button>
-                </div>
-            </div>
-
-            <div class="post-item">
-                <h3>Making a layout system from scratch</h3>
-                <div class="info">
-                    <h5>12 Jan 2024</h5>
-                    <h5>|</h5>
-                    <h5>Design, Layout</h5>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet pariatur porro quaerat provident
-                    corporis facere ex voluptatibus laudantium voluptates quos.</p>
-                <div class="buttons">
-                    <i class='bx bx-share'></i>
-                    <i class='bx bx-link-alt'></i>
-                    <i class='bx bx-copy'></i>
-                    <i class='bx bx-bookmark-plus'></i>
-                    <button>Read More</button>
-                </div>
-            </div>
-
         </div>
+
+
+        <div class="project-card" id="card2">
+            <img src="project-image.jpg" alt="Project Image" class="project-card__image">
+            <div class="project-card__content">
+                <h2 class="project-card__title">Project Name</h2>
+                <p class="project-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet metus nec diam facilisis pretium.</p>
+                <p class="project-card__technologies">Technologies: HTML, CSS, JavaScript</p>
+                <div class="project-card__links">
+                    <a href="https://github.com/username/repository" target="_blank" class="project-card__link">Source Code</a>
+                    <a href="https://live-demo-link.com" target="_blank" class="project-card__link project-card__link--live-demo">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="project-card" id="card3">
+            <img src="project-image.jpg" alt="Project Image" class="project-card__image">
+            <div class="project-card__content">
+                <h2 class="project-card__title">Project Name</h2>
+                <p class="project-card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet metus nec diam facilisis pretium.</p>
+                <p class="project-card__technologies">Technologies: HTML, CSS, JavaScript</p>
+                <div class="project-card__links">
+                    <a href="https://github.com/username/repository" target="_blank" class="project-card__link">Source Code</a>
+                    <a href="https://live-demo-link.com" target="_blank" class="project-card__link project-card__link--live-demo">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+
+        
+
     </div>
 
 
-
     <Footer />
+
+
+
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+    // Example usage: disableLiveDemo('project-card--1');
+});
+
+function disableLiveDemo(cardClass) {
+    const projectCard = document.querySelector(`#${cardClass}`);
+    const liveDemoLink = projectCard.querySelector('.project-card__link--live-demo');
+
+    if (liveDemoLink) {
+        liveDemoLink.classList.add('disabled');
+    }
+}
+
+function enableLiveDemo(cardClass) {
+    const projectCard = document.querySelector(`.${cardClass}`);
+    const liveDemoLink = projectCard.querySelector('.project-card__link--live-demo');
+
+    if (liveDemoLink) {
+        liveDemoLink.classList.remove('disabled');
+    }
+}
+
+
+
+disableLiveDemo('card1')
+disableLiveDemo('card2')
+disableLiveDemo('card3')
+
+
+</script>
+
 </body>
 </html>
