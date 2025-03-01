@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     gap: 10px;
-    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
+    flex-wrap: wrap; 
 }
 
 .single-cta i {
