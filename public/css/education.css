@@ -1,0 +1,83 @@
+.education-section {
+    padding: 60px 148px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea a la izquierda */
+    gap: 30px;
+    background: linear-gradient(-45deg, #add8e6, #ffffff, #87ceeb, #ffffff); 
+    background-size: 400% 400%; 
+    animation: gradient 15s ease infinite;
+}
+
+.page-title {
+    font-size: 36px;
+    color: black;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-align: left; /* Alineación a la izquierda */
+}
+
+.education-item {
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 20px; /* Espacio entre elementos */
+}
+
+.education-title {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el logo y el título */
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+}
+
+.education-logo {
+    width: 30px; /* Ajusta el tamaño del logo */
+    height: auto;
+}
+
+.education-institution {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.education-description {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.cv-download-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #303f9f;
+    color: white;
+    text-decoration: none;
+    padding: 12px 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: fit-content; /* Evita que se expanda innecesariamente */
+    margin: 20px auto; /* Centrado */
+}
+
+.cv-download-button:hover {
+    background-color: #1a237e;
+}
+
+/* ✅ Ajuste responsive */
+@media (max-width: 600px) {
+    .cv-download-button {
+        width: 90%; /* Se adapta a pantallas pequeñas */
+        font-size: 14px; /* Reduce el tamaño del texto */
+        padding: 10px 20px;
+    }
+}
+
+
+

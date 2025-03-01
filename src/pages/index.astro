@@ -1,6 +1,11 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Skills from '../components/Skills.astro';
+import InfoSection from '../components/Info.astro';
+import RecentProjects from '../components/RecentProjects.astro';
+import FeaturedProjects from '../components/FeaturedXp.astro';
+
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -8,64 +13,19 @@ import Footer from '../components/Footer.astro';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/assets/logo.png">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/css/style.css">
-    <title>Portafolio Angel</title>
+    <title>Portafolio Angel Ortega</title>
 </head>
 <body>
 
 <Nav />
 
-<div class="main">
-    <div class="info">
-        <h1>hey i am angel a pasionate....</h1>
-        <div class="wrapper">
-            <div class="roles">
-                <div>web developer.</div>
-                <div>backend developer.</div>
-                <div>student</div>
-                <div>software engineer</div>
-            </div>
-        </div>
-    </div>
-    <img src="/assets/FotoAngel.jpg" alt="Profile Picture">
-</div>
-<div class="recent">
-    <div class="card">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg>
-        <div class="card__content">
-          <p class="card__title">Project Name</p>
-          <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-          <button class="card__button">Live Demo</button>
-          <button class="card__button secondary">Source Code</button>
-        </div>
-      </div>
+    <InfoSection />
+    <Skills />
+    <RecentProjects />
+    <FeaturedProjects />
 
-      <div class="card">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg>
-        <div class="card__content">
-          <p class="card__title">Project Name</p>
-          <p class="card__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-          <button class="card__button">Live Demo</button>
-          <button class="card__button secondary">Source Code</button>
-        </div>
-      </div>
-
-
-      <a class="vertodo" href="/singlework">view all</a>
-
-</div>
-
-<div class="featured">
-    <h1>Works Projects Experience</h1>
-    <div class="construction">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="48" height="48">
-            <path fill="#f44336" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 7h2v7h-2zm0 8h2v2h-2z"/>
-        </svg>
-        <p>This section is under construction.</p>
-    </div>
-</div>
-
+    
 <Footer />
 
 <script>
@@ -81,6 +41,42 @@ setInterval(function() {
         current = 1;
     } else current++;
 }, 2000);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Example usage: disableLiveDemo('project-card--1');
+});
+
+function disableLiveDemo(cardClass) {
+    const projectCard = document.querySelector(`#${cardClass}`);
+    const liveDemoLink = projectCard.querySelector('.project-card__link--live-demo');
+
+    if (liveDemoLink) {
+        liveDemoLink.classList.add('disabled');
+    }
+}
+
+function enableLiveDemo(cardClass) {
+    const projectCard = document.querySelector(`.${cardClass}`);
+    const liveDemoLink = projectCard.querySelector('.project-card__link--live-demo');
+
+    if (liveDemoLink) {
+        liveDemoLink.classList.remove('disabled');
+    }
+}
+
+
+
+disableLiveDemo('card1')
+disableLiveDemo('card2')
+disableLiveDemo('card3')
+disableLiveDemo('card5')
+
+
+
 </script>
 
 
