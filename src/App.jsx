@@ -4,7 +4,7 @@ import { ThemeProvider, CssBaseline, Box } from "@mui/material";
 import { useThemeMode } from "./hooks/useThemeMode";
 import Header from "./Components/Head/Header";
 import Hero from "./Components/Hero/Hero";
-import Technologies from "./components/Technologies/Technologies";
+import Technologies from "./Components/Technologies/Technologies";
 import Projects from "./Components/Projects/Projects";
 import Contact from "./Components/Contact/Contact";
 import Footer from "./Components/Foot/Footer";
