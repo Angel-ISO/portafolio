@@ -8,27 +8,49 @@ const resources = {
       "navbar.title": "angelbladeX technologies",
       
       "hero.title": "Hello, I'm Angel Gabriel Ortega",
-      "hero.subtitle": "In the vast technological universe, I define myself as a passionate explorer. As a software engineering student and backend developer, my focus is on creating applications that combine the arts of this field. Currently, I aspire to contribute to a company all the knowledge and skills I'm acquiring throughout my career.",
+      "hero.subtitle": "  Software Engineering student with two or more years of experience in full-stack development. Campuslands certified Software Development Technician (1,800 hours). Specialized in Oracle technologies and backend development. Active participant in hackathons and technology events. Oracle Cloud Infrastructure Certified. Passionate about technological innovation and solving complex problems through scalable solutions.",
       "hero.contact": "Contact me",
-      
-      "technologies.title": "Technologies",
+  
+      "technologies.title": "Technologies Stack",
+      "technologies.subtitle": "Tools and technologies I master to create innovative and scalable solutions",
+      "technologies.frontend": "Frontend",
+      "technologies.backend": "Backend",
+      "technologies.database": "Database",
+      "technologies.tools": "DevOps & Tools",
+      "technologies.stats.technologies": "Technologies",
+      "technologies.stats.experience": "Years Experience",
+      "technologies.stats.categories": "Categories",
+      "technologies.stats.projects": "Projects",
       
       "projects.title": "Projects",
+      "projects.subtitle": "Projects I have developed",
       "projects.demo": "Demo",
       "projects.repository": "Repository",
       "projects.description": "Description",
       "projects.technologies": "Technologies used",
-      
+      "projects.stats.total": "Total Projects",
+      "projects.stats.technologies": "Technologies",
+      "projects.stats.featured": "Featured",
+      "projects.stats.repositories": "Repositories",
+
+
       "contact.title": "Contact",
       "contact.name": "Name",
       "contact.email": "Email",
       "contact.message": "Message",
       "contact.submit": "Send Message via WhatsApp",
+      "contact.formTitle": "Have a project in mind?",
+      "contact.formSubtitle": "Let's talk and make your ideas come true!",
+      "contact.sendButton": "Send Message via WhatsApp",
+      "contact.sending": "Sending...",
       
       "modal.close": "Close",
       "modal.viewDemo": "View Demo",
       "modal.viewRepo": "View Repository",
       
+      "footer.title": "angelbladeX",
+      "footer.description": "Backend developer passionate about creating innovative and scalable solutions. Transforming ideas into digital reality.",
+      "footer.connect": "Let's Connect",
       "footer.copyright": "© {{year}} Angel|Bladex. All rights reserved.",
 
         "projects.crimeio.title": "Crime.io",
@@ -52,30 +74,56 @@ const resources = {
       "navbar.title": "angelbladeX technologies",
       
       "hero.title": "Hola, soy Angel Gabriel Ortega",
-      "hero.subtitle": "En el vasto universo tecnológico, me defino como un explorador apasionado. Como estudiante de ingeniería de software y desarrollador backend, mi trayectoria se centra en crear aplicaciones que combinen las artes de este campo. Actualmente, aspiro a aportar a una empresa todos los conocimientos y habilidades que estoy adquiriendo a lo largo de mi carrera.",
+      "hero.subtitle": "Estudiante de Ingeniería de Software con más de dos años de experiencia en desarrollo full-stack. Técnico en Desarrollo de Software certificado por Campuslands (1,800 horas). Especializado en tecnologías Oracle y desarrollo backend. Participante activo en hackatones y eventos tecnológicos. Certificado en Oracle Cloud Infrastructure. Apasionado por la innovación tecnológica y la resolución de problemas complejos a través de soluciones escalables.",
       "hero.contact": "Contáctame",
       
       "technologies.title": "Tecnologías",
+      "technologies.subtitle": "Herramientas y tecnologías que domino para crear soluciones innovadoras y escalables",
+      "technologies.frontend": "Frontend",
+      "technologies.backend": "Backend",
+      "technologies.database": "Bases de datos",
+      "technologies.tools": "DevOps & Herramientas",
+      "technologies.stats.technologies": "Tecnologías",
+      "technologies.stats.experience": "Años de Experiencia",
+      "technologies.stats.categories": "Categorías",
+      "technologies.stats.projects": "Proyectos",
+      
       
       "projects.title": "Proyectos",
+      "projects.subtitle": "Proyectos que he desarrollado",
       "projects.demo": "Demo",
       "projects.repository": "Repositorio",
       "projects.description": "Descripción",
       "projects.technologies": "Tecnologías utilizadas",
+      "projects.stats.total": "Proyectos Totales",
+      "projects.stats.technologies": "Tecnologías",
+      "projects.stats.featured": "Destacados",
+      "projects.stats.repositories": "Repositorios",
+      
+
       
       "contact.title": "Contacto",
       "contact.name": "Nombre",
       "contact.email": "Email",
       "contact.message": "Mensaje",
       "contact.submit": "Enviar Mensaje por WhatsApp",
+      "contact.formTitle": "¿Tienes un proyecto en mente?",
+      "contact.formSubtitle": "¡Hablemos y hagamos realidad tus ideas!",
+      "contact.sendButton": "Enviar Mensaje por WhatsApp",
+      "contact.sending": "Enviando...",
+
       
       
       "modal.close": "Cerrar",
       "modal.viewDemo": "Ver Demo",
       "modal.viewRepo": "Ver Repositorio",
       
-      "footer.copyright": "© {{year}} Angel|Bladex. Todos los derechos reservados.",
 
+      "footer.title": "angelbladeX",
+      "footer.description": "Desarrollador Backend apasionado por crear soluciones innovadoras y escalables. Transformando ideas en realidad digital.",
+      "footer.connect": "Conectemos",
+      "footer.copyright": "© {{year}} Angel|Bladex. Todos los derechos reservados.",
+      
        "projects.crimeio.title": "Crime.io",
       "projects.crimeio.description": "Proyecto final de la asignatura estadística, diseñado para predecir la probabilidad de que un crimen ocurra en una zona determinada de la ciudad, utilizando datos históricos y visualizaciones interactivas. En San Francisco, EE.UU., este proyecto utiliza un modelo de regresión lineal para predecir probabilidades de crimen. También participó en un hackathon de IA donde obtuvo el tercer lugar.",
       
