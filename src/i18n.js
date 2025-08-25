@@ -66,7 +66,10 @@ const resources = {
       "projects.spaceinvaders.description": "Final project for Programming 3 course. This is a Space Invaders game using vanilla C# with WinForms, implementing learned concepts like the MVVM pattern and strong OOP abstraction.",
       
       "projects.cis.title": "CIS Project",
-      "projects.cis.description": "Final project for Software Development 3 course. This is an idea, topic and vote management system using Spring Boot, Hibernate, MySQL, JWT, Swagger, .NET Core and MongoDB. It applies initial microservices concepts with a hexagonal architecture and strong security/authentication system using Spring Security and JWT."
+      "projects.cis.description": "Final project for Software Development 3 course. This is an idea, topic and vote management system using Spring Boot, Hibernate, MySQL, JWT, Swagger, .NET Core and MongoDB. It applies initial microservices concepts with a hexagonal architecture and strong security/authentication system using Spring Security and JWT.",
+
+      "projects.pathfinder.title": "Path finderX",
+      "projects.pathfinder.description": "Final project for Programming 4 where a route calculation management system was developed using functional programming and advanced practices such as intelligent cache management and the use of the Haversine equation with the A* algorithm for optimal and accurate performance."
     }
   },
   es: {
@@ -137,7 +140,10 @@ const resources = {
       "projects.spaceinvaders.description": "Proyecto final del curso Programación 3. Juego de Invasores del Espacio desarrollado en C# con WinForms, implementando conceptos aprendidos como el patrón MVVM y fuerte abstracción con POO.",
       
       "projects.cis.title": "Proyecto CIS",
-      "projects.cis.description": "Proyecto final de la asignatura Desarrollo de Software 3. Sistema de administración de ideas, tópicos y votos usando Spring Boot, Hibernate, MySQL, JWT, Swagger, .NET Core y MongoDB. Aplica conceptos iniciales de microservicios con arquitectura hexagonal y sistema de seguridad/autenticación robusto usando Spring Security y JWT."
+      "projects.cis.description": "Proyecto final de la asignatura Desarrollo de Software 3. Sistema de administración de ideas, tópicos y votos usando Spring Boot, Hibernate, MySQL, JWT, Swagger, .NET Core y MongoDB. Aplica conceptos iniciales de microservicios con arquitectura hexagonal y sistema de seguridad/autenticación robusto usando Spring Security y JWT.",
+
+      "projects.pathfinder.title": "Buscador de Rutas",
+      "projects.pathfinder.description": "Proyecto final de programacion 4 donde se desarrollo de un sistema de gestion de calculo de rutas utilizando programacion funcional y practicas avanzadas como manejo de cache inteligente y uso de la ecuacion haversine con el algoritmo A* para el rendimiento optimo y certero"
     }
   }
 };

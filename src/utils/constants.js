@@ -3,6 +3,7 @@ import Crimeo from "../assets/Projects/CrimeiO.png"
 import ForumsA from "../assets/Projects/Forums.png"
 import SpaceInv from "../assets/Projects/SpaceInvaders.png"
 import Cisp from "../assets/Projects/Cis.png"
+import PathfinderImage from "../assets/Projects/PatFindersX.png"
 
 
 export const technologies = [
@@ -90,5 +91,15 @@ export const projects = (t) => [
         link: "",
         repo: "https://github.com/Angel-ISO/CIS-CSHARP/blob/main/",
         previewEnabled: false,
+      },
+      {
+        title: t("projects.pathfinder.title"),
+        description: t("projects.pathfinder.description"),
+        image: PathfinderImage,
+        technologies: ["Functional Programming", "Material UI", "Node.js", "React", "Leaflet.js", "Redis", "MongoDb", "JavaScript", "Intelligent Cache Management", "Haversine Equation", "A* Algorithm"],
+        link: "https://pathfinderx.stellarco.online",
+        repo: "https://github.com/Angel-ISO/Pathfinder",
+        previewEnabled: true,
       }
+
 ]
