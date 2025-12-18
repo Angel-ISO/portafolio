@@ -4,6 +4,9 @@ import ForumsA from "../assets/Projects/Forums.png"
 import SpaceInv from "../assets/Projects/SpaceInvaders.png"
 import Cisp from "../assets/Projects/Cis.png"
 import PathfinderImage from "../assets/Projects/PatFindersX.png"
+import PileX from "../assets/Projects/PileX.png"
+import StellersLogo from "../assets/Projects/StellersLogo.png"
+import Quanoclickup from "../assets/Projects/quanoclickup.jpg"
 
 
 export const technologies = [
@@ -100,6 +103,33 @@ export const projects = (t) => [
         link: "https://pathfinderx.stellarco.online",
         repo: "https://github.com/Angel-ISO/Pathfinder",
         previewEnabled: true,
+      },
+      {
+        title: t("projects.pilex.title"),
+        description: t("projects.pilex.description"),
+        image: PileX,
+        technologies: ["Node.js", "React", "WebSocket", "Canvas", "MongoDB"],
+        link: "https://pilex.stellarco.online/",
+        repo: "https://github.com/Angel-ISO/PileX",
+        previewEnabled: true,
+      },
+      {
+        title: t("projects.stellers.title"),
+        description: t("projects.stellers.description"),
+        image: StellersLogo,
+        technologies: ["NestJS", "GraphQL", "TypeScript", "Prisma", "Supabase", "PostgreSQL", "Svelte", "Docker", "Jest"],
+        link: "https://unstables.devops.jala.university/",
+        repo: "https://github.com/Angel-ISO/Stellers-Ecomerce",
+        previewEnabled: true,
+      },
+      {
+        title: t("projects.clickup.title"),
+        description: t("projects.clickup.description"),
+        image: Quanoclickup,
+        technologies: ["Jest", "Axios", "JavaScript", "AJV", "ESLint", "Dotenv"],
+        link: "",
+        repo: "https://github.com/Angel-ISO/ClickUp-Testing",
+        previewEnabled: false,
       }
 
 ]

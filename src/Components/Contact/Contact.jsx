@@ -1,20 +1,25 @@
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  Paper, 
-  Grid, 
-  TextField, 
+import {
+  Box,
+  Container,
+  Typography,
+  Paper,
+  Grid,
+  TextField,
   Button,
   InputAdornment,
-  useTheme
+  useTheme,
+  Snackbar,
+  Alert,
+  CircularProgress
 } from "@mui/material"
-import { 
-  WhatsApp, 
-  Person, 
-  Email, 
+import {
+  WhatsApp,
+  Person,
+  Email,
   Message,
-  Send
+  Send,
+  Subject,
+  Phone
 } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
 import { useState, useEffect, useRef } from "react"
@@ -29,26 +34,63 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
+    phone: "",
     message: "",
   })
+  const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const sectionRef = useRef()
   const titleRef = useRef()
   const formRef = useRef()
   const fieldRefs = useRef([])
 
+  const validateForm = () => {
+    const newErrors = {}
+    if (!formData.name.trim()) newErrors.name = t("contact.validation.name")
+    if (!formData.email.trim()) {
+      newErrors.email = t("contact.validation.email")
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = t("contact.validation.email")
+    }
+    if (!formData.subject.trim()) newErrors.subject = t("contact.validation.subject")
+    if (!formData.message.trim()) newErrors.message = t("contact.validation.message")
+    if (formData.message.length > 500) newErrors.message = t("contact.maxCharacters")
+    return newErrors
+  }
+
   const handleChange = (e) => {
+    const { name, value } = e.target
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     })
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: "",
+      })
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const validationErrors = validateForm()
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      gsap.from(Object.keys(validationErrors).map(key => fieldRefs.current.find(ref => ref?.name === key)), {
+        x: -10,
+        duration: 0.3,
+        ease: "power2.out"
+      })
+      return
+    }
+
     setIsSubmitting(true)
-    
+    setErrors({})
+
     gsap.to(e.target.querySelector('button'), {
       scale: 0.95,
       duration: 0.1,
@@ -56,20 +98,23 @@ const Contact = () => {
       repeat: 1
     })
 
-    await new Promise(resolve => setTimeout(resolve, 500)) 
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     const message = encodeURIComponent(
       `🌟 *Nuevo Contacto desde Portfolio* 🌟\n\n` +
       `👤 *Nombre:* ${formData.name}\n` +
-      `📧 *Email:* ${formData.email}\n\n` +
+      `📧 *Email:* ${formData.email}\n` +
+      `📞 *Teléfono:* ${formData.phone || 'No proporcionado'}\n` +
+      `📋 *Asunto:* ${formData.subject}\n\n` +
       `💬 *Mensaje:*\n${formData.message}\n\n` +
       `---\nEnviado desde angelbladeX.dev`
     )
-    
+
     window.open(`https://wa.me/+573222946366?text=${message}`, "_blank")
+    setSuccess(true)
     setIsSubmitting(false)
 
-    setFormData({ name: "", email: "", message: "" })
+    setFormData({ name: "", email: "", subject: "", phone: "", message: "" })
     gsap.from(fieldRefs.current, {
       scale: 0.98,
       duration: 0.3,
@@ -232,6 +277,8 @@ const Contact = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      error={!!errors.name}
+                      helperText={errors.name}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -265,6 +312,8 @@ const Contact = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
+                      error={!!errors.email}
+                      helperText={errors.email}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -288,21 +337,53 @@ const Contact = () => {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       ref={el => fieldRefs.current[2] = el}
                       required
                       fullWidth
-                      label={t("contact.message")}
-                      name="message"
-                      multiline
-                      rows={4}
-                      value={formData.message}
+                      label={t("contact.subject")}
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      error={!!errors.subject}
+                      helperText={errors.subject}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Subject color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2,
+                          "&:hover fieldset": {
+                            borderColor: theme.palette.primary.main,
+                          },
+                          "&.Mui-focused": {
+                            "& fieldset": {
+                              borderColor: theme.palette.primary.main,
+                              borderWidth: 2,
+                            },
+                          },
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      ref={el => fieldRefs.current[3] = el}
+                      fullWidth
+                      label={t("contact.phone")}
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
                       onChange={handleChange}
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 2 }}>
-                            <Message color="primary" />
+                          <InputAdornment position="start">
+                            <Phone color="primary" />
                           </InputAdornment>
                         ),
                       }}
@@ -323,15 +404,56 @@ const Contact = () => {
                     />
                   </Grid>
                   <Grid item xs={12}>
+                    <TextField
+                      ref={el => fieldRefs.current[4] = el}
+                      required
+                      fullWidth
+                      label={t("contact.message")}
+                      name="message"
+                      multiline
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      error={!!errors.message}
+                      helperText={errors.message || `${formData.message.length}/500 ${t("contact.characters")}`}
+                      inputProps={{ maxLength: 500 }}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 2 }}>
+                            <Message color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2,
+                          "&:hover fieldset": {
+                            borderColor: theme.palette.primary.main,
+                          },
+                          "&.Mui-focused": {
+                            "& fieldset": {
+                              borderColor: theme.palette.primary.main,
+                              borderWidth: 2,
+                            },
+                          },
+                        },
+                        "& .MuiFormHelperText-root": {
+                          textAlign: "right",
+                          color: formData.message.length > 450 ? "warning.main" : formData.message.length > 500 ? "error.main" : "text.secondary",
+                        },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
                     <Button
-                      ref={el => fieldRefs.current[3] = el}
+                      ref={el => fieldRefs.current[5] = el}
                       type="submit"
                       variant="contained"
                       color="primary"
                       size="large"
                       fullWidth
                       disabled={isSubmitting}
-                      startIcon={isSubmitting ? <Send /> : <WhatsApp />}
+                      startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : <WhatsApp />}
                       sx={{
                         py: 2,
                         borderRadius: 3,
@@ -346,8 +468,10 @@ const Contact = () => {
                           boxShadow: `0 12px 32px rgba(${theme.palette.primary.main.replace('#', '')}, 0.4)`,
                         },
                         "&:disabled": {
-                          background: "rgba(0,0,0,0.12)",
-                          color: "rgba(0,0,0,0.26)",
+                          background: theme.palette.action.disabledBackground,
+                          color: theme.palette.action.disabled,
+                          boxShadow: "none",
+                          transform: "none",
                         },
                         transition: "all 0.3s ease",
                       }}
@@ -361,6 +485,22 @@ const Contact = () => {
           </Grid>
         </Grid>
       </Container>
+
+      <Snackbar
+        open={success}
+        autoHideDuration={6000}
+        onClose={() => setSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => setSuccess(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {t("contact.success")}
+        </Alert>
+      </Snackbar>
     </Box>
   )
 }

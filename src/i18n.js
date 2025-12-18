@@ -37,12 +37,21 @@ const resources = {
       "contact.title": "Contact",
       "contact.name": "Name",
       "contact.email": "Email",
+      "contact.subject": "Subject",
+      "contact.phone": "Phone (Optional)",
       "contact.message": "Message",
       "contact.submit": "Send Message via WhatsApp",
       "contact.formTitle": "Have a project in mind?",
       "contact.formSubtitle": "Let's talk and make your ideas come true!",
       "contact.sendButton": "Send Message via WhatsApp",
       "contact.sending": "Sending...",
+      "contact.validation.name": "Name is required",
+      "contact.validation.email": "Please enter a valid email",
+      "contact.validation.subject": "Subject is required",
+      "contact.validation.message": "Message is required",
+      "contact.success": "Message sent successfully! Opening WhatsApp...",
+      "contact.characters": "Characters",
+      "contact.maxCharacters": "Max 500 characters",
       
       "modal.close": "Close",
       "modal.viewDemo": "View Demo",
@@ -69,7 +78,13 @@ const resources = {
       "projects.cis.description": "Final project for Software Development 3 course. This is an idea, topic and vote management system using Spring Boot, Hibernate, MySQL, JWT, Swagger, .NET Core and MongoDB. It applies initial microservices concepts with a hexagonal architecture and strong security/authentication system using Spring Security and JWT.",
 
       "projects.pathfinder.title": "Path finderX",
-      "projects.pathfinder.description": "Final project for Programming 4 where a route calculation management system was developed using functional programming and advanced practices such as intelligent cache management and the use of the Haversine equation with the A* algorithm for optimal and accurate performance."
+      "projects.pathfinder.description": "Final project for Programming 4 where a route calculation management system was developed using functional programming and advanced practices such as intelligent cache management and the use of the Haversine equation with the A* algorithm for optimal and accurate performance.",
+      "projects.pilex.title": "PileX",
+      "projects.pilex.description": "Collaborative real-time drawing system integrating a REST API backend with WebSocket, a modern React frontend with advanced drawing tools, and adapted Agar.io game logic for collaborative drawing.",
+      "projects.stellers.title": "Stellers E-Commerce",
+      "projects.stellers.description": "E-commerce platform with backend API built using NestJS, GraphQL, and Hexagonal Architecture, featuring Supabase authentication, Prisma ORM, and a Svelte frontend for complete e-commerce functionality including product management and store operations.",
+      "projects.clickup.title": "ClickUp Testing Framework",
+      "projects.clickup.description": "Comprehensive API testing suite for ClickUp developed as the final project for Software Quality Engineering 3 course. Implements automated tests for functionality, performance, security, and reliability using Jest, Axios, and clean architecture principles."
     }
   },
   es: {
@@ -108,12 +123,21 @@ const resources = {
       "contact.title": "Contacto",
       "contact.name": "Nombre",
       "contact.email": "Email",
+      "contact.subject": "Asunto",
+      "contact.phone": "Teléfono (Opcional)",
       "contact.message": "Mensaje",
       "contact.submit": "Enviar Mensaje por WhatsApp",
       "contact.formTitle": "¿Tienes un proyecto en mente?",
       "contact.formSubtitle": "¡Hablemos y hagamos realidad tus ideas!",
       "contact.sendButton": "Enviar Mensaje por WhatsApp",
       "contact.sending": "Enviando...",
+      "contact.validation.name": "El nombre es obligatorio",
+      "contact.validation.email": "Por favor ingresa un email válido",
+      "contact.validation.subject": "El asunto es obligatorio",
+      "contact.validation.message": "El mensaje es obligatorio",
+      "contact.success": "¡Mensaje enviado exitosamente! Abriendo WhatsApp...",
+      "contact.characters": "Caracteres",
+      "contact.maxCharacters": "Máximo 500 caracteres",
 
       
       
@@ -143,7 +167,13 @@ const resources = {
       "projects.cis.description": "Proyecto final de la asignatura Desarrollo de Software 3. Sistema de administración de ideas, tópicos y votos usando Spring Boot, Hibernate, MySQL, JWT, Swagger, .NET Core y MongoDB. Aplica conceptos iniciales de microservicios con arquitectura hexagonal y sistema de seguridad/autenticación robusto usando Spring Security y JWT.",
 
       "projects.pathfinder.title": "Buscador de Rutas",
-      "projects.pathfinder.description": "Proyecto final de programacion 4 donde se desarrollo de un sistema de gestion de calculo de rutas utilizando programacion funcional y practicas avanzadas como manejo de cache inteligente y uso de la ecuacion haversine con el algoritmo A* para el rendimiento optimo y certero"
+      "projects.pathfinder.description": "Proyecto final de programacion 4 donde se desarrollo de un sistema de gestion de calculo de rutas utilizando programacion funcional y practicas avanzadas como manejo de cache inteligente y uso de la ecuacion haversine con el algoritmo A* para el rendimiento optimo y certero",
+      "projects.pilex.title": "PileX",
+      "projects.pilex.description": "Sistema de dibujo colaborativo en tiempo real que integra un backend API REST con WebSocket, un frontend React moderno con herramientas de dibujo avanzadas, y lógica de juego Agar.io adaptada para dibujo colaborativo.",
+      "projects.stellers.title": "Stellers E-Commerce",
+      "projects.stellers.description": "Plataforma de comercio electrónico con API backend desarrollada en NestJS, GraphQL y Arquitectura Hexagonal, incluyendo autenticación Supabase, ORM Prisma y frontend en Svelte para funcionalidad completa de e-commerce con gestión de productos y operaciones de tienda.",
+      "projects.clickup.title": "Framework de Testing ClickUp",
+      "projects.clickup.description": "Suite completa de pruebas API para ClickUp desarrollada como proyecto final de la asignatura Ingeniería de Calidad de Software 3. Implementa pruebas automatizadas para funcionalidad, rendimiento, seguridad y confiabilidad usando Jest, Axios y principios de arquitectura limpia."
     }
   }
 };
