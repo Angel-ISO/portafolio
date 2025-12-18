@@ -448,8 +448,6 @@ const Contact = () => {
                     <Button
                       ref={el => fieldRefs.current[5] = el}
                       type="submit"
-                      variant="contained"
-                      color="primary"
                       size="large"
                       fullWidth
                       disabled={isSubmitting}
@@ -461,6 +459,7 @@ const Contact = () => {
                         fontWeight: "bold",
                         fontSize: "1.1rem",
                         background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                        color: "white",
                         boxShadow: `0 8px 24px rgba(${theme.palette.primary.main.replace('#', '')}, 0.3)`,
                         "&:hover": {
                           background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
@@ -468,8 +467,8 @@ const Contact = () => {
                           boxShadow: `0 12px 32px rgba(${theme.palette.primary.main.replace('#', '')}, 0.4)`,
                         },
                         "&:disabled": {
-                          background: theme.palette.action.disabledBackground,
-                          color: theme.palette.action.disabled,
+                          background: "rgba(0,0,0,0.3)",
+                          color: "rgba(255,255,255,0.7)",
                           boxShadow: "none",
                           transform: "none",
                         },
