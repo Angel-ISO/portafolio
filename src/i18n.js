@@ -8,7 +8,7 @@ const resources = {
       "navbar.title": "angelbladeX technologies",
       
       "hero.title": "Hello, I'm Angel Gabriel Ortega",
-      "hero.subtitle": "  Software Engineering student with two or more years of experience in full-stack development. Campuslands certified Software Development Technician (1,800 hours). Specialized in Oracle technologies and backend development. Active participant in hackathons and technology events. Oracle Cloud Infrastructure Certified. Passionate about technological innovation and solving complex problems through scalable solutions.",
+      "hero.subtitle": "Software Engineer with over two years of experience in full-stack development. Campuslands certified Software Development Technician (1,800 hours). Specialized in Oracle technologies and backend development. Active participant in hackathons and technology events. Oracle Cloud Infrastructure Certified. Passionate about technological innovation and solving complex problems through scalable solutions.",
       "hero.contact": "Contact me",
   
       "technologies.title": "Technologies Stack",
@@ -92,7 +92,7 @@ const resources = {
       "navbar.title": "angelbladeX technologies",
       
       "hero.title": "Hola, soy Angel Gabriel Ortega",
-      "hero.subtitle": "Estudiante de Ingeniería de Software con más de dos años de experiencia en desarrollo full-stack. Técnico en Desarrollo de Software certificado por Campuslands (1,800 horas). Especializado en tecnologías Oracle y desarrollo backend. Participante activo en hackatones y eventos tecnológicos. Certificado en Oracle Cloud Infrastructure. Apasionado por la innovación tecnológica y la resolución de problemas complejos a través de soluciones escalables.",
+      "hero.subtitle": "Ingeniero de Software con más de dos años de experiencia en desarrollo full-stack. Técnico en Desarrollo de Software certificado por Campuslands (1,800 horas). Especializado en tecnologías Oracle y desarrollo backend. Participante activo en hackatones y eventos tecnológicos. Certificado en Oracle Cloud Infrastructure. Apasionado por la innovación tecnológica y la resolución de problemas complejos a través de soluciones escalables.",
       "hero.contact": "Contáctame",
       
       "technologies.title": "Tecnologías",
