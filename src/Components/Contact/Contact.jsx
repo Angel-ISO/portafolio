@@ -149,7 +149,7 @@ const Contact = () => {
         },
       })
 
-      gsap.from(fieldRefs.current, {
+      gsap.from(fieldRefs.current.slice(0, 5), {
         duration: 0.6,
         y: 30,
         opacity: 0,
