@@ -42,7 +42,7 @@ const Footer = () => {
     },
     {
       icon: <Email />,
-      url: "mailto:angelgabriel@example.com",
+      url: "mailto:angelgabrielorteg@gmail.com",
       label: "Email",
       color: "#EA4335"
     }

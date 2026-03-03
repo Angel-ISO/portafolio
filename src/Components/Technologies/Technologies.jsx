@@ -1,6 +1,6 @@
 import { Box, Container, Typography, Paper, Chip } from "@mui/material"
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from "swiper/modules"
+import { Pagination, Autoplay, EffectCoverflow } from "swiper/modules"
 import { useTranslation } from "react-i18next"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
@@ -101,6 +101,7 @@ const Technologies = () => {
 
   return (
     <Box 
+      id="technologies"
       ref={sectionRef}
       sx={{ 
         py: 10,
@@ -206,9 +207,21 @@ const Technologies = () => {
        
 
         {/* Swiper de tecnologías */}
-        <Box ref={swiperRef} sx={{ mt: 4 }}>
+        <Box ref={swiperRef} sx={{
+          mt: 4,
+          '& .swiper-slide': {
+            pointerEvents: 'auto !important',
+          },
+          '& .swiper-pagination-bullet': {
+            backgroundColor: 'primary.main',
+            opacity: 0.3,
+          },
+          '& .swiper-pagination-bullet-active': {
+            opacity: 1,
+          }
+        }}>
           <Swiper
-            modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+            modules={[Pagination, Autoplay, EffectCoverflow]}
             effect="coverflow"
             grabCursor={true}
             centeredSlides={true}
@@ -219,11 +232,7 @@ const Technologies = () => {
               stretch: 0,
               depth: 150,
               modifier: 1.5,
-              slideShadows: true,
-            }}
-            navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
+              slideShadows: false,
             }}
             pagination={{ 
               clickable: true,
@@ -236,14 +245,14 @@ const Technologies = () => {
             }}
             loop={true}
             breakpoints={{
-              320: { slidesPerView: 1, spaceBetween: 20 },
-              640: { slidesPerView: 2, spaceBetween: 20 },
-              768: { slidesPerView: 3, spaceBetween: 30 },
+              320:  { slidesPerView: 1, spaceBetween: 20 },
+              640:  { slidesPerView: 2, spaceBetween: 20 },
+              768:  { slidesPerView: 3, spaceBetween: 30 },
               1024: { slidesPerView: 4, spaceBetween: 30 },
               1200: { slidesPerView: 5, spaceBetween: 30 },
             }}
             style={{
-              paddingBottom: '60px',
+              paddingBottom: '50px',
               paddingTop: '20px'
             }}
           >
@@ -252,19 +261,13 @@ const Technologies = () => {
               const category = getTechCategory(tech.name)
               
               return (
-                <SwiperSlide 
-                  key={index}
-                  style={{ 
-                    width: '280px',
-                    height: 'auto'
-                  }}
-                >
+                <SwiperSlide key={index} style={{ width: '260px' }}>
                   <Paper 
-                    elevation={8}
+                    elevation={0}
                     sx={{ 
-                      p: 4,
+                      p: 3,
                       textAlign: "center",
-                      height: "200px",
+                      height: "180px",
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'center',
@@ -307,35 +310,29 @@ const Technologies = () => {
                       }
                     }}
                   >
-                    <Box
+                    <Chip 
+                      label={category}
+                      size="small"
                       sx={{
                         position: 'absolute',
-                        top: 16,
-                        right: 16,
-                        opacity: 0.6
+                        top: 10,
+                        right: 10,
+                        fontSize: '0.65rem',
+                        height: '18px',
+                        backgroundColor: `${techColor}15`,
+                        color: techColor,
+                        fontWeight: 600,
+                        opacity: 0.7
                       }}
-                    >
-                      <Chip 
-                        label={category}
-                        size="small"
-                        sx={{
-                          fontSize: '0.7rem',
-                          height: '20px',
-                          backgroundColor: `${techColor}15`,
-                          color: techColor,
-                          fontWeight: 'bold'
-                        }}
-                      />
-                    </Box>
+                    />
                     
                     <i 
                       className={`${tech.icon} tech-icon`}
                       style={{ 
-                        fontSize: "56px",
+                        fontSize: "44px",
                         color: techColor,
-                        marginBottom: '16px',
+                        marginBottom: '12px',
                         transition: 'all 0.3s ease',
-                        filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.1))'
                       }}
                     />
                     
@@ -357,39 +354,7 @@ const Technologies = () => {
             })}
           </Swiper>
 
-          <Box
-            sx={{
-              '& .swiper-button-next, & .swiper-button-prev': {
-                color: 'primary.main',
-                backgroundColor: 'background.paper',
-                width: '50px',
-                height: '50px',
-                borderRadius: '50%',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                '&::after': {
-                  fontSize: '20px',
-                  fontWeight: 'bold'
-                },
-                '&:hover': {
-                  transform: 'scale(1.1)',
-                  backgroundColor: 'primary.main',
-                  color: 'white'
-                }
-              },
-              '& .swiper-pagination': {
-                '& .swiper-pagination-bullet': {
-                  backgroundColor: 'primary.main',
-                  opacity: 0.3,
-                  width: '12px',
-                  height: '12px'
-                },
-                '& .swiper-pagination-bullet-active': {
-                  opacity: 1,
-                  transform: 'scale(1.2)'
-                }
-              }
-            }}
-          />
+
         </Box>
       </Container>
     </Box>

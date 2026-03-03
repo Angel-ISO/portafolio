@@ -3,7 +3,6 @@ import {
   Container,
   Typography,
   Paper,
-  Grid,
   TextField,
   Button,
   InputAdornment,
@@ -229,260 +228,246 @@ const Contact = () => {
           </Typography>
         </Box>
 
-        <Grid container justifyContent="center">
-          <Grid item xs={12} md={8}>
-            <Paper
-              ref={formRef}
-              elevation={8}
-              sx={{
-                p: 4,
-                background: theme.palette.mode === 'dark'
-                  ? "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)"
-                  : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
-                backdropFilter: "blur(10px)",
-                border: theme.palette.mode === 'dark'
-                  ? "1px solid rgba(255,255,255,0.1)"
-                  : "1px solid rgba(229, 57, 53, 0.1)",
-                borderRadius: 3,
-                position: "relative",
-                overflow: "hidden",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: "4px",
-                  background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                },
-              }}
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Paper
+            ref={formRef}
+            elevation={8}
+            sx={{
+              p: { xs: 3, md: 5 },
+              width: '100%',
+              maxWidth: '700px',
+              background: theme.palette.mode === 'dark'
+                ? "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)"
+                : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
+              backdropFilter: "blur(10px)",
+              border: theme.palette.mode === 'dark'
+                ? "1px solid rgba(255,255,255,0.1)"
+                : "1px solid rgba(229, 57, 53, 0.1)",
+              borderRadius: 3,
+              position: "relative",
+              overflow: "hidden",
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "4px",
+                background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+              },
+            }}
+          >
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              color="text.primary"
+              sx={{ mb: 4, textAlign: 'center' }}
             >
-              <Typography
-                variant="h5"
-                fontWeight="bold"
-                color="text.primary"
-                sx={{ mb: 4, textAlign: 'center' }}
-              >
-                {t("contact.formTitle")}
-              </Typography>
+              {t("contact.formTitle")}
+            </Typography>
 
-              <form onSubmit={handleSubmit}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      ref={el => fieldRefs.current[0] = el}
-                      required
-                      fullWidth
-                      label={t("contact.name")}
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      error={!!errors.name}
-                      helperText={errors.name}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Person color="primary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 2,
-                          "&:hover fieldset": {
-                            borderColor: theme.palette.primary.main,
-                          },
-                          "&.Mui-focused": {
-                            "& fieldset": {
-                              borderColor: theme.palette.primary.main,
-                              borderWidth: 2,
-                            },
-                          },
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      ref={el => fieldRefs.current[1] = el}
-                      required
-                      fullWidth
-                      label={t("contact.email")}
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      error={!!errors.email}
-                      helperText={errors.email}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Email color="primary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 2,
-                          "&:hover fieldset": {
-                            borderColor: theme.palette.primary.main,
-                          },
-                          "&.Mui-focused": {
-                            "& fieldset": {
-                              borderColor: theme.palette.primary.main,
-                              borderWidth: 2,
-                            },
-                          },
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      ref={el => fieldRefs.current[2] = el}
-                      required
-                      fullWidth
-                      label={t("contact.subject")}
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      error={!!errors.subject}
-                      helperText={errors.subject}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Subject color="primary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 2,
-                          "&:hover fieldset": {
-                            borderColor: theme.palette.primary.main,
-                          },
-                          "&.Mui-focused": {
-                            "& fieldset": {
-                              borderColor: theme.palette.primary.main,
-                              borderWidth: 2,
-                            },
-                          },
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      ref={el => fieldRefs.current[3] = el}
-                      fullWidth
-                      label={t("contact.phone")}
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Phone color="primary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 2,
-                          "&:hover fieldset": {
-                            borderColor: theme.palette.primary.main,
-                          },
-                          "&.Mui-focused": {
-                            "& fieldset": {
-                              borderColor: theme.palette.primary.main,
-                              borderWidth: 2,
-                            },
-                          },
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      ref={el => fieldRefs.current[4] = el}
-                      required
-                      fullWidth
-                      label={t("contact.message")}
-                      name="message"
-                      multiline
-                      rows={4}
-                      value={formData.message}
-                      onChange={handleChange}
-                      error={!!errors.message}
-                      helperText={errors.message || `${formData.message.length}/500 ${t("contact.characters")}`}
-                      inputProps={{ maxLength: 500 }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 2 }}>
-                            <Message color="primary" />
-                          </InputAdornment>
-                        ),
-                      }}
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          borderRadius: 2,
-                          "&:hover fieldset": {
-                            borderColor: theme.palette.primary.main,
-                          },
-                          "&.Mui-focused": {
-                            "& fieldset": {
-                              borderColor: theme.palette.primary.main,
-                              borderWidth: 2,
-                            },
-                          },
-                        },
-                        "& .MuiFormHelperText-root": {
-                          textAlign: "right",
-                          color: formData.message.length > 450 ? "warning.main" : formData.message.length > 500 ? "error.main" : "text.secondary",
-                        },
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button
-                      ref={el => fieldRefs.current[5] = el}
-                      type="submit"
-                      size="large"
-                      fullWidth
-                      disabled={isSubmitting}
-                      startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : <WhatsApp />}
-                      sx={{
-                        py: 2,
-                        borderRadius: 3,
-                        textTransform: "none",
-                        fontWeight: "bold",
-                        fontSize: "1.1rem",
-                        background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                        color: "white",
-                        boxShadow: `0 8px 24px rgba(${theme.palette.primary.main.replace('#', '')}, 0.3)`,
-                        "&:hover": {
-                          background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-                          transform: "translateY(-2px)",
-                          boxShadow: `0 12px 32px rgba(${theme.palette.primary.main.replace('#', '')}, 0.4)`,
-                        },
-                        "&:disabled": {
-                          background: "rgba(0,0,0,0.3)",
-                          color: "rgba(255,255,255,0.7)",
-                          boxShadow: "none",
-                          transform: "none",
-                        },
-                        transition: "all 0.3s ease",
-                      }}
-                    >
-                      {isSubmitting ? t("contact.sending") : t("contact.sendButton")}
-                    </Button>
-                  </Grid>
-                </Grid>
-              </form>
-            </Paper>
-          </Grid>
-        </Grid>
+            <form onSubmit={handleSubmit}>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
+                  gap: 3,
+                }}
+              >
+                <TextField
+                  ref={el => fieldRefs.current[0] = el}
+                  required
+                  fullWidth
+                  label={t("contact.name")}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  error={!!errors.name}
+                  helperText={errors.name}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Person color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      "&:hover fieldset": {
+                        borderColor: theme.palette.primary.main,
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.primary.main,
+                        borderWidth: 2,
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  ref={el => fieldRefs.current[1] = el}
+                  required
+                  fullWidth
+                  label={t("contact.email")}
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  error={!!errors.email}
+                  helperText={errors.email}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Email color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      "&:hover fieldset": {
+                        borderColor: theme.palette.primary.main,
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.primary.main,
+                        borderWidth: 2,
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  ref={el => fieldRefs.current[2] = el}
+                  required
+                  fullWidth
+                  label={t("contact.subject")}
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  error={!!errors.subject}
+                  helperText={errors.subject}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Subject color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      "&:hover fieldset": {
+                        borderColor: theme.palette.primary.main,
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.primary.main,
+                        borderWidth: 2,
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  ref={el => fieldRefs.current[3] = el}
+                  fullWidth
+                  label={t("contact.phone")}
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Phone color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      "&:hover fieldset": {
+                        borderColor: theme.palette.primary.main,
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.primary.main,
+                        borderWidth: 2,
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  ref={el => fieldRefs.current[4] = el}
+                  required
+                  fullWidth
+                  label={t("contact.message")}
+                  name="message"
+                  multiline
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  error={!!errors.message}
+                  helperText={errors.message || `${formData.message.length}/500 ${t("contact.characters")}`}
+                  inputProps={{ maxLength: 500 }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 2 }}>
+                        <Message color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    gridColumn: '1 / -1',
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2,
+                      "&:hover fieldset": {
+                        borderColor: theme.palette.primary.main,
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: theme.palette.primary.main,
+                        borderWidth: 2,
+                      },
+                    },
+                    "& .MuiFormHelperText-root": {
+                      textAlign: "right",
+                      color: formData.message.length > 450 ? "warning.main" : formData.message.length > 500 ? "error.main" : "text.secondary",
+                    },
+                  }}
+                />
+                <Button
+                  ref={el => fieldRefs.current[5] = el}
+                  type="submit"
+                  size="large"
+                  fullWidth
+                  disabled={isSubmitting}
+                  startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : <WhatsApp />}
+                  sx={{
+                    gridColumn: '1 / -1',
+                    py: 2,
+                    borderRadius: 3,
+                    textTransform: "none",
+                    fontWeight: "bold",
+                    fontSize: "1.1rem",
+                    background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                    color: "white",
+                    boxShadow: `0 8px 24px rgba(229, 57, 53, 0.3)`,
+                    "&:hover": {
+                      background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
+                      transform: "translateY(-2px)",
+                      boxShadow: `0 12px 32px rgba(229, 57, 53, 0.4)`,
+                    },
+                    "&:disabled": {
+                      background: "rgba(0,0,0,0.3)",
+                      color: "rgba(255,255,255,0.7)",
+                      boxShadow: "none",
+                      transform: "none",
+                    },
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  {isSubmitting ? t("contact.sending") : t("contact.sendButton")}
+                </Button>
+              </Box>
+            </form>
+          </Paper>
+        </Box>
       </Container>
 
       <Snackbar

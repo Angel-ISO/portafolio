@@ -1,15 +1,18 @@
-import { Box, Container, Grid, Typography, Button, Avatar } from "@mui/material"
-import { ArrowForward } from "@mui/icons-material"
+import { Box, Container, Grid, Typography, Button, Avatar, Chip } from "@mui/material"
+import { ArrowForward, Download } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import MeImg from "../../assets/Angel.jpeg"
+import CV from "../../assets/Angel_Gabriel_Ortega_Backend_Engineer_CV.pdf"
 
 const Hero = () => {
   const { t } = useTranslation()
   const heroRef = useRef()
   const avatarRef = useRef()
+  const greetingRef = useRef()
   const titleRef = useRef()
+  const roleRef = useRef()
   const subtitleRef = useRef()
   const buttonRef = useRef()
 
@@ -25,19 +28,33 @@ const Hero = () => {
         ease: "back.out(1.7)"
       })
 
+      tl.from(greetingRef.current, {
+        duration: 0.6,
+        y: 20,
+        opacity: 0,
+        ease: "power2.out"
+      }, "-=0.5")
+
       tl.from(titleRef.current, {
         duration: 0.8,
         y: 40,
         opacity: 0,
         ease: "power2.out"
-      }, "-=0.5")
+      }, "-=0.3")
+
+      tl.from(roleRef.current, {
+        duration: 0.6,
+        scale: 0.8,
+        opacity: 0,
+        ease: "back.out(1.7)"
+      }, "-=0.3")
 
       tl.from(subtitleRef.current, {
         duration: 0.8,
         y: 20,
         opacity: 0,
         ease: "power2.out"
-      }, "-=0.4")
+      }, "-=0.3")
 
       tl.from(buttonRef.current, {
         duration: 0.6,
@@ -64,26 +81,6 @@ const Hero = () => {
         })
       })
 
-      buttonRef.current?.addEventListener('mouseenter', () => {
-        gsap.to(buttonRef.current, {
-          duration: 0.3,
-          y: -3,
-          scale: 1.02,
-          boxShadow: '0 8px 20px rgba(229, 57, 53, 0.4)',
-          ease: "power2.out"
-        })
-      })
-
-      buttonRef.current?.addEventListener('mouseleave', () => {
-        gsap.to(buttonRef.current, {
-          duration: 0.3,
-          y: 0,
-          scale: 1,
-          boxShadow: '0 4px 12px rgba(229, 57, 53, 0.25)',
-          ease: "power2.out"
-        })
-      })
-
     }, heroRef)
 
     return () => ctx.revert()
@@ -93,7 +90,10 @@ const Hero = () => {
     <Box
       ref={heroRef}
       sx={{
-        py: 8,
+        py: { xs: 6, md: 10 },
+        minHeight: { md: '80vh' },
+        display: 'flex',
+        alignItems: 'center',
         position: 'relative',
         overflow: 'hidden'
       }}
@@ -111,19 +111,41 @@ const Hero = () => {
               order: { xs: 1, sm: 1 },
             }}
           >
-            <Avatar
-              ref={avatarRef}
-              src={MeImg}
-              alt="Angel Gabriel Ortega"
-              sx={{
-                width: { xs: 200, sm: 220, md: 280 },
-                height: { xs: 200, sm: 220, md: 280 },
-                border: "4px solid",
-                borderColor: "primary.main",
-                cursor: "pointer",
-                boxShadow: '0 4px 15px rgba(229, 57, 53, 0.15)'
-              }}
-            />
+            <Box sx={{ position: 'relative' }}>
+              <Avatar
+                ref={avatarRef}
+                src={MeImg}
+                alt="Angel Gabriel Ortega"
+                sx={{
+                  width: { xs: 200, sm: 220, md: 280 },
+                  height: { xs: 200, sm: 220, md: 280 },
+                  border: "4px solid",
+                  borderColor: "primary.main",
+                  cursor: "pointer",
+                  boxShadow: '0 4px 15px rgba(229, 57, 53, 0.15)'
+                }}
+              />
+              <Box
+                sx={{
+                  position: 'absolute',
+                  bottom: 10,
+                  right: -10,
+                  width: 20,
+                  height: 20,
+                  borderRadius: '50%',
+                  bgcolor: '#4caf50',
+                  border: '3px solid',
+                  borderColor: 'background.default',
+                  boxShadow: '0 0 0 2px #4caf50',
+                  animation: 'pulse 2s infinite',
+                  '@keyframes pulse': {
+                    '0%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0.4)' },
+                    '70%': { boxShadow: '0 0 0 10px rgba(76, 175, 80, 0)' },
+                    '100%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0)' },
+                  }
+                }}
+              />
+            </Box>
           </Grid>
           <Grid
             item
@@ -134,6 +156,8 @@ const Hero = () => {
               order: { xs: 2, sm: 2 },
             }}
           >
+           
+
             <Typography
               ref={titleRef}
               variant="h2"
@@ -143,37 +167,35 @@ const Hero = () => {
               sx={{
                 fontSize: { xs: "2rem", sm: "2.5rem", md: "3.75rem" },
                 lineHeight: 1.2,
-                mb: 3,
-                color: "text.primary",
-                position: 'relative',
-                '&::after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: -10,
-                  left: 0,
-                  width: '80px',
-                  height: '4px',
-                  background: 'primary.main',
-                  borderRadius: '2px'
-                }
+                mb: 2,
+                background: (theme) => theme.palette.mode === 'dark'
+                  ? 'linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #ff6f60 100%)'
+                  : 'linear-gradient(135deg, #1a1a2e 0%, #212121 50%, #e53935 100%)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
               }}
             >
               {t("hero.title")}
             </Typography>
+
             <Typography
               ref={subtitleRef}
-              variant="h5"
+              variant="h6"
               color="text.secondary"
               paragraph
               sx={{
-                fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.25rem" },
                 mb: 4,
-                lineHeight: 1.6
+                lineHeight: 1.8,
+                maxWidth: '550px',
+                fontWeight: 400
               }}
             >
               {t("hero.subtitle")}
             </Typography>
-            <Box ref={buttonRef} sx={{ display: "inline-flex" }}>
+
+            <Box ref={buttonRef} sx={{ display: "flex", gap: 2, flexWrap: 'wrap' }}>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -187,13 +209,38 @@ const Hero = () => {
                   fontWeight: 'bold',
                   boxShadow: '0 4px 12px rgba(229, 57, 53, 0.25)',
                   cursor: 'pointer',
-                  transition: 'none',
+                  transition: 'all 0.3s ease',
                   '&:hover': {
-                    boxShadow: '0 4px 12px rgba(229, 57, 53, 0.25)',
+                    transform: 'translateY(-3px)',
+                    boxShadow: '0 8px 20px rgba(229, 57, 53, 0.4)',
                   }
                 }}
               >
                 {t("hero.contact")}
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                size="large"
+                startIcon={<Download />}
+                href={CV}
+                download="Angel_Gabriel_Ortega_CV.pdf"
+                sx={{
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: '50px',
+                  fontWeight: 'bold',
+                  borderWidth: 2,
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    borderWidth: 2,
+                    transform: 'translateY(-3px)',
+                    boxShadow: '0 8px 20px rgba(229, 57, 53, 0.2)',
+                  }
+                }}
+              >
+                {t("hero.downloadCV")}
               </Button>
             </Box>
           </Grid>

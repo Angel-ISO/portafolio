@@ -4,6 +4,7 @@ import { ThemeProvider, CssBaseline, Box } from "@mui/material";
 import { useThemeMode } from "./hooks/useThemeMode";
 import Header from "./Components/Head/Header";
 import Hero from "./Components/Hero/Hero";
+import About from "./Components/About/About";
 import Technologies from "./Components/Technologies/Technologies";
 import Projects from "./Components/Projects/Projects";
 import Contact from "./Components/Contact/Contact";
@@ -48,6 +49,7 @@ function App() {
         <Box sx={{ position: "relative", zIndex: 1 }}>
           <Header mode={mode} toggleMode={toggleMode} />
           <Hero />
+          <About />
           <Technologies />
           <Projects handleOpenModal={handleOpenModal} />
           <Contact />

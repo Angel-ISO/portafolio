@@ -155,6 +155,7 @@ const Projects = ({ handleOpenModal }) => {
 
   return (
     <Box
+      id="projects"
       ref={sectionRef}
       sx={{
         py: 10,
