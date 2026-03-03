@@ -59,31 +59,39 @@ const About = () => {
 
       const timelineItems = timelineRef.current?.querySelectorAll(".timeline-item") || []
       timelineItems.forEach((item, index) => {
-        gsap.from(item, {
-          duration: 0.8,
-          x: index % 2 === 0 ? -60 : 60,
-          opacity: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: item,
-            start: "top 90%",
-            toggleActions: "play none none reverse"
+        gsap.fromTo(item,
+          { x: index % 2 === 0 ? -60 : 60, opacity: 0 },
+          {
+            duration: 0.8,
+            x: 0,
+            opacity: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 92%",
+              toggleActions: "play none none reverse"
+            }
           }
-        })
+        )
       })
 
-      gsap.from(educationRef.current?.children || [], {
-        duration: 0.8,
-        y: 30,
-        opacity: 0,
-        stagger: 0.15,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: educationRef.current,
-          start: "top 90%",
-          toggleActions: "play none none reverse"
-        }
-      })
+      if (educationRef.current?.children?.length) {
+        gsap.fromTo(educationRef.current.children, 
+          { y: 30, opacity: 0 },
+          {
+            duration: 0.8,
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: educationRef.current,
+              start: "top 95%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        )
+      }
     }, sectionRef)
 
     return () => ctx.revert()
