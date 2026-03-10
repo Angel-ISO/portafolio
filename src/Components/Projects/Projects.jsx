@@ -66,7 +66,8 @@ const Projects = ({ handleOpenModal }) => {
       HTML5: "#E34F26",
       Redis: "#D82C20",
       "Leaflet.js": "#1990D8",
-      
+      Angular: "#DD0031",
+      SCSS: "#CC6699",
     }
     return techColors[tech] || theme.palette.primary.main
   }

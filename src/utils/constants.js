@@ -7,6 +7,7 @@ import PathfinderImage from "../assets/Projects/PatFindersX.png"
 import PileX from "../assets/Projects/PileX.png"
 import StellersLogo from "../assets/Projects/StellersLogo.png"
 import Quanoclickup from "../assets/Projects/quanoclickup.jpg"
+import HoteleXImage from "../assets/Projects/HoteleX.png"
 
 
 export const technologies = [
@@ -36,7 +37,9 @@ export const technologies = [
   { name: "Oracle Cloud", icon: "bx bxs-cloud" },
   { name: "Coolify", icon: "bx bxs-server" },
   { name: "Express.js", icon: "bx bx-server" },       
-  { name: "NestJS", icon: "bx bx-shape-circle" },     
+  { name: "NestJS", icon: "bx bx-shape-circle" },
+  { name: "Angular", icon: "bx bxl-angular" },
+  { name: "SCSS", icon: "bx bxl-sass" },
 ]
 
 export const projects = (t) => [
@@ -109,7 +112,7 @@ export const projects = (t) => [
         description: t("projects.pilex.description"),
         image: PileX,
         technologies: ["Node.js", "React", "WebSocket", "Canvas", "MongoDB"],
-        link: "https://pilex.stellarco.online/",
+        link: "https://pilex.onrender.com",
         repo: "https://github.com/Angel-ISO/PileX",
         previewEnabled: true,
       },
@@ -130,6 +133,15 @@ export const projects = (t) => [
         link: "",
         repo: "https://github.com/Angel-ISO/ClickUp-Testing",
         previewEnabled: false,
+      },
+      {
+        title: t("projects.hotelex.title"),
+        description: t("projects.hotelex.description"),
+        image: HoteleXImage,
+        technologies: ["Angular", "TypeScript", "NestJS", "MongoDB", "SCSS", "JWT", "Redis"],
+        link: "https://hotelexfront.onrender.com/",
+        repo: "https://github.com/Angel-ISO/HoteleX",
+        previewEnabled: true,
       }
 
 ]

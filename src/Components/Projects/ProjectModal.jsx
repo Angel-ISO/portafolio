@@ -1,9 +1,30 @@
 import { useEffect, useRef } from "react"
 import { Dialog, DialogContent, Box, IconButton, Typography, Button, Chip, Backdrop, useTheme, useMediaQuery } from "@mui/material"
 import { Close, GitHub, Launch } from "@mui/icons-material"
+import { useTranslation } from "react-i18next"
 import { gsap } from "gsap"
 
+const getTechColor = (tech) => {
+  const colors = {
+    react: "#61dafb", vue: "#42b883", angular: "#dd1b16",
+    javascript: "#f7df1e", typescript: "#3178c6",
+    "node.js": "#68a063", nodejs: "#68a063", nestjs: "#e0234e",
+    "express.js": "#68a063", python: "#3776ab",
+    "spring boot": "#6db33f", ".net": "#512bd4", "c#": "#239120",
+    java: "#ed8b00", css3: "#1572b6", css: "#1572b6",
+    html5: "#e34f26", html: "#e34f26",
+    mongodb: "#47a248", postgresql: "#336791", mysql: "#4479a1",
+    "sql server": "#cc2927", redis: "#d82c20", supabase: "#3ecf8e",
+    docker: "#2496ed", git: "#f05032", graphql: "#e10098",
+    svelte: "#ff3e00", prisma: "#2d3748", jest: "#c21325",
+    "material ui": "#007fff", bootstrap: "#7952b3",
+    "leaflet.js": "#199900", websocket: "#010101",
+  }
+  return colors[tech.toLowerCase()] || "#e53935"
+}
+
 const ProjectModal = ({ open, handleClose, project }) => {
+  const { t } = useTranslation()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const isSmallMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -16,98 +37,67 @@ const ProjectModal = ({ open, handleClose, project }) => {
   const buttonsRef = useRef([])
 
   useEffect(() => {
-    if (open && modalRef.current) {
+    if (open && contentRef.current) {
       const tl = gsap.timeline()
 
-      // Animación del contenedor principal
-      tl.fromTo(
-        contentRef.current,
-        {
-          scale: isMobile ? 0.9 : 0.8,
-          opacity: 0,
-          rotationY: isMobile ? 0 : -15,
-          transformPerspective: 1000,
-          y: isMobile ? 50 : 0,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          rotationY: 0,
-          y: 0,
-          duration: isMobile ? 0.4 : 0.6,
-          ease: isMobile ? "power2.out" : "back.out(1.7)",
-        },
+      tl.fromTo(contentRef.current,
+        { scale: isMobile ? 0.95 : 0.85, opacity: 0, y: isMobile ? 40 : 0 },
+        { scale: 1, opacity: 1, y: 0, duration: isMobile ? 0.4 : 0.5, ease: "power3.out" },
       )
 
-      // Animación de la imagen con efecto parallax
-      tl.fromTo(
-        imageRef.current,
-        { x: isMobile ? 0 : -50, y: isMobile ? -30 : 0, opacity: 0, scale: 0.9 },
-        { x: 0, y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
-        isMobile ? "-=0.2" : "-=0.3",
-      )
-
-      // Animación de los detalles
-      tl.fromTo(
-        detailsRef.current,
-        { x: isMobile ? 0 : 50, y: isMobile ? 30 : 0, opacity: 0 },
-        { x: 0, y: 0, opacity: 1, duration: 0.5, ease: "power2.out" },
-        isMobile ? "-=0.3" : "-=0.4",
-      )
-
-      // Animación de los chips de tecnología
-      tl.fromTo(
-        techChipsRef.current,
-        { y: 20, opacity: 0, scale: 0.8 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.3,
-          stagger: 0.05,
-          ease: "back.out(1.7)",
-        },
+      tl.fromTo(imageRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
         "-=0.2",
       )
 
-      // Animación de los botones
-      tl.fromTo(
-        buttonsRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.4,
-          stagger: 0.1,
-          ease: "power2.out",
-        },
-        "-=0.1",
+      tl.fromTo(detailsRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+        "-=0.3",
       )
+
+      const validChips = techChipsRef.current.filter(Boolean)
+      if (validChips.length) {
+        tl.fromTo(validChips,
+          { y: 15, opacity: 0, scale: 0.9 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.3, stagger: 0.04, ease: "back.out(1.7)" },
+          "-=0.2",
+        )
+      }
+
+      const validButtons = buttonsRef.current.filter(Boolean)
+      if (validButtons.length) {
+        tl.fromTo(validButtons,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.3, stagger: 0.1, ease: "power2.out" },
+          "-=0.1",
+        )
+      }
     }
   }, [open, isMobile])
 
   const handleCloseWithAnimation = () => {
-    const tl = gsap.timeline({
-      onComplete: handleClose,
-    })
-
-    tl.to(contentRef.current, {
-      scale: isMobile ? 0.9 : 0.8,
+    gsap.to(contentRef.current, {
+      scale: 0.9,
       opacity: 0,
-      rotationY: isMobile ? 0 : 15,
-      y: isMobile ? 30 : 0,
-      duration: 0.3,
+      y: 20,
+      duration: 0.25,
       ease: "power2.in",
+      onComplete: handleClose,
     })
   }
 
   if (!project) return null
 
+  const primaryColor = theme.palette.primary.main
+  const primaryLight = theme.palette.primary.light
+
   return (
     <Dialog
       open={open}
       onClose={handleCloseWithAnimation}
-      maxWidth={isMobile ? false : "lg"}
+      maxWidth={isMobile ? false : "md"}
       fullWidth={!isMobile}
       fullScreen={isMobile}
       ref={modalRef}
@@ -123,14 +113,8 @@ const ProjectModal = ({ open, handleClose, project }) => {
       BackdropComponent={Backdrop}
       BackdropProps={{
         sx: {
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          backdropFilter: "blur(10px)",
-        },
-      }}
-      sx={{
-        "& .MuiDialog-container": {
-          alignItems: isMobile ? "stretch" : "center",
-          justifyContent: isMobile ? "stretch" : "center",
+          backgroundColor: "rgba(0, 0, 0, 0.85)",
+          backdropFilter: "blur(12px)",
         },
       }}
     >
@@ -138,28 +122,22 @@ const ProjectModal = ({ open, handleClose, project }) => {
         ref={contentRef}
         sx={{
           p: 0,
-          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)",
+          background: theme.palette.mode === 'dark'
+            ? "linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(18, 18, 18, 0.98) 100%)"
+            : "linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(245, 245, 245, 0.98) 100%)",
           backdropFilter: "blur(20px)",
-          border: isMobile ? "none" : "1px solid rgba(255, 255, 255, 0.1)",
-          borderRadius: isMobile ? 0 : "24px",
-          overflow: isMobile ? "auto" : "hidden",
+          border: isMobile ? "none" : `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(229,57,53,0.15)'}`,
+          borderRadius: isMobile ? 0 : "20px",
+          overflow: "auto",
           position: "relative",
           maxHeight: isMobile ? "100vh" : "90vh",
           display: "flex",
           flexDirection: "column",
-          "&::-webkit-scrollbar": {
-            width: "8px",
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "rgba(255, 255, 255, 0.1)",
-            borderRadius: "4px",
-          },
+          "&::-webkit-scrollbar": { width: "6px" },
+          "&::-webkit-scrollbar-track": { background: "transparent" },
           "&::-webkit-scrollbar-thumb": {
-            background: "linear-gradient(135deg, #6366f1, #a855f7)",
-            borderRadius: "4px",
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            background: "linear-gradient(135deg, #5855eb, #7c3aed)",
+            background: `linear-gradient(135deg, ${primaryColor}, ${primaryLight})`,
+            borderRadius: "3px",
           },
           "&::before": {
             content: '""',
@@ -167,303 +145,239 @@ const ProjectModal = ({ open, handleClose, project }) => {
             top: 0,
             left: 0,
             right: 0,
-            height: "1px",
-            background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)",
-            zIndex: 1,
+            height: "3px",
+            background: `linear-gradient(90deg, ${primaryColor}, ${primaryLight})`,
+            zIndex: 2,
           },
         }}
       >
-        {/* Header */}
-        <Box
+        {/* Close button */}
+        <IconButton
+          onClick={handleCloseWithAnimation}
           sx={{
-            position: isMobile ? "sticky" : "relative",
-            top: 0,
+            position: "absolute",
+            top: isMobile ? 10 : 14,
+            right: isMobile ? 10 : 14,
             zIndex: 10,
-            background: isMobile 
-              ? "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%)"
-              : "linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)",
-            backdropFilter: "blur(20px)",
-            p: isMobile ? 2 : 3,
-            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+            background: theme.palette.mode === 'dark'
+              ? "rgba(255, 255, 255, 0.08)"
+              : "rgba(0, 0, 0, 0.05)",
+            color: "text.primary",
+            width: 38,
+            height: 38,
+            "&:hover": {
+              background: `rgba(229, 57, 53, 0.15)`,
+              color: primaryColor,
+            },
+            transition: "all 0.2s ease",
           }}
         >
+          <Close sx={{ fontSize: "1.2rem" }} />
+        </IconButton>
+
+        {/* Image */}
+        <Box
+          ref={imageRef}
+          sx={{
+            position: "relative",
+            overflow: "hidden",
+            flexShrink: 0,
+            "&::after": {
+              content: '""',
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "60px",
+              background: theme.palette.mode === 'dark'
+                ? "linear-gradient(to top, rgba(30,30,30,1) 0%, transparent 100%)"
+                : "linear-gradient(to top, rgba(255,255,255,1) 0%, transparent 100%)",
+              pointerEvents: "none",
+            },
+          }}
+        >
+          <img
+            src={project.image}
+            alt={project.title}
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              objectFit: "contain",
+            }}
+          />
+          {project.previewEnabled && (
+            <Chip
+              label="Live"
+              size="small"
+              sx={{
+                position: "absolute",
+                top: 14,
+                left: 14,
+                backgroundColor: theme.palette.success.main,
+                color: "white",
+                fontWeight: 700,
+                fontSize: "0.7rem",
+                height: "24px",
+                zIndex: 1,
+                '&::before': {
+                  content: '""',
+                  width: 6,
+                  height: 6,
+                  borderRadius: '50%',
+                  backgroundColor: '#fff',
+                  marginRight: '6px',
+                  animation: 'pulse 2s infinite',
+                  '@keyframes pulse': {
+                    '0%, 100%': { opacity: 1 },
+                    '50%': { opacity: 0.4 },
+                  },
+                },
+              }}
+            />
+          )}
+        </Box>
+
+        {/* Content */}
+        <Box ref={detailsRef} sx={{ p: isMobile ? 2.5 : 4, pt: isMobile ? 1.5 : 2 }}>
+          {/* Title */}
           <Typography
-            variant={isSmallMobile ? "h5" : isMobile ? "h4" : "h4"}
+            variant={isMobile ? "h5" : "h4"}
             sx={{
-              background: "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-              fontWeight: 700,
-              mb: 1,
-              pr: isMobile ? 6 : 0,
+              fontWeight: 800,
+              mb: 2,
+              color: "text.primary",
               lineHeight: 1.2,
             }}
           >
             {project.title}
           </Typography>
 
-          <IconButton
-            onClick={handleCloseWithAnimation}
+          {/* Description */}
+          <Typography
+            variant="body1"
             sx={{
-              position: "absolute",
-              top: isMobile ? 12 : 16,
-              right: isMobile ? 12 : 16,
-              background: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              color: "white",
-              width: isMobile ? 40 : 44,
-              height: isMobile ? 40 : 44,
-              "&:hover": {
-                background: "rgba(255, 255, 255, 0.2)",
-                transform: "scale(1.1)",
-              },
-              transition: "all 0.3s ease",
+              color: "text.secondary",
+              mb: 3,
+              lineHeight: 1.8,
+              fontSize: isMobile ? "0.95rem" : "1.05rem",
             }}
           >
-            <Close sx={{ fontSize: isMobile ? "1.2rem" : "1.5rem" }} />
-          </IconButton>
-        </Box>
+            {project.description}
+          </Typography>
 
-        {/* Content */}
-        <Box 
-          sx={{ 
-            flex: 1,
-            p: isMobile ? 2 : 4,
-            overflow: isMobile ? "visible" : "auto",
-          }}
-        >
-          <Box
+          {/* Tech chips */}
+          <Typography
+            variant="overline"
             sx={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : { xs: "1fr", md: "1fr 1fr" },
-              gap: isMobile ? 3 : 4,
-              alignItems: "start",
+              color: primaryColor,
+              fontWeight: 700,
+              letterSpacing: '1.5px',
+              mb: 1.5,
+              display: 'block',
             }}
           >
-            {/* Imagen del proyecto */}
-            <Box
-              ref={imageRef}
-              sx={{
-                position: "relative",
-                borderRadius: "16px",
-                overflow: "hidden",
-                boxShadow: isMobile 
-                  ? "0 10px 25px rgba(0, 0, 0, 0.3)" 
-                  : "0 20px 40px rgba(0, 0, 0, 0.3)",
-                order: isMobile ? 1 : 0,
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  background: "linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1))",
-                  opacity: 0,
-                  transition: "opacity 0.3s ease",
-                  zIndex: 1,
-                },
-                "&:hover::before": {
-                  opacity: isMobile ? 0 : 1,
-                },
-              }}
-            >
-              <img
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "block",
-                  transition: "transform 0.3s ease",
-                  minHeight: isMobile ? "200px" : "auto",
-                  objectFit: "cover",
-                }}
-                onMouseEnter={(e) => {
-                  if (!isMobile) {
-                    gsap.to(e.target, { scale: 1.05, duration: 0.3 })
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isMobile) {
-                    gsap.to(e.target, { scale: 1, duration: 0.3 })
-                  }
-                }}
-              />
-            </Box>
+            {t("projects.technologies")}
+          </Typography>
 
-            {/* Detalles del proyecto */}
-            <Box 
-              ref={detailsRef}
-              sx={{
-                order: isMobile ? 2 : 1,
-              }}
-            >
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "rgba(255, 255, 255, 0.9)",
-                  mb: 2,
-                  fontWeight: 600,
-                  fontSize: isMobile ? "1.1rem" : "1.25rem",
-                }}
-              >
-                Descripción
-              </Typography>
-
-              <Typography
-                sx={{
-                  color: "rgba(255, 255, 255, 0.7)",
-                  mb: 3,
-                  lineHeight: 1.6,
-                  fontSize: isMobile ? "0.95rem" : "1.1rem",
-                }}
-              >
-                {project.description}
-              </Typography>
-
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "rgba(255, 255, 255, 0.9)",
-                  mb: 2,
-                  fontWeight: 600,
-                  fontSize: isMobile ? "1.1rem" : "1.25rem",
-                }}
-              >
-                Tecnologías
-              </Typography>
-
-              <Box sx={{ 
-                display: "flex", 
-                flexWrap: "wrap", 
-                gap: isMobile ? 0.8 : 1, 
-                mb: 4 
-              }}>
-                {project.technologies.map((tech, index) => {
-                  const getChipColor = (tech) => {
-                    const techLower = tech.toLowerCase()
-                    if (["react", "vue", "angular"].includes(techLower)) return "#61dafb"
-                    if (["javascript", "js"].includes(techLower)) return "#f7df1e"
-                    if (["typescript", "ts"].includes(techLower)) return "#3178c6"
-                    if (["node", "nodejs"].includes(techLower)) return "#339933"
-                    if (["python"].includes(techLower)) return "#3776ab"
-                    if (["css", "scss", "sass"].includes(techLower)) return "#1572b6"
-                    if (["html"].includes(techLower)) return "#e34f26"
-                    return "#6366f1"
-                  }
-
-                  return (
-                    <Chip
-                      key={index}
-                      ref={(el) => (techChipsRef.current[index] = el)}
-                      label={tech}
-                      size={isMobile ? "small" : "medium"}
-                      sx={{
-                        background: `linear-gradient(135deg, ${getChipColor(tech)}20, ${getChipColor(tech)}10)`,
-                        color: getChipColor(tech),
-                        border: `1px solid ${getChipColor(tech)}30`,
-                        fontWeight: 600,
-                        fontSize: isMobile ? "0.75rem" : "0.875rem",
-                        height: isMobile ? "28px" : "32px",
-                        "&:hover": {
-                          background: `linear-gradient(135deg, ${getChipColor(tech)}30, ${getChipColor(tech)}20)`,
-                          transform: isMobile ? "none" : "translateY(-2px)",
-                          boxShadow: isMobile ? "none" : `0 8px 16px ${getChipColor(tech)}20`,
-                        },
-                        transition: "all 0.3s ease",
-                      }}
-                    />
-                  )
-                })}
-              </Box>
-
-              <Box sx={{ 
-                display: "flex", 
-                gap: isMobile ? 1.5 : 2, 
-                flexDirection: isSmallMobile ? "column" : "row",
-                flexWrap: "wrap" 
-              }}>
-                {project.previewEnabled && (
-                  <Button
-                    ref={(el) => (buttonsRef.current[0] = el)}
-                    variant="contained"
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    startIcon={<Launch sx={{ fontSize: isMobile ? "1rem" : "1.25rem" }} />}
-                    size={isMobile ? "medium" : "large"}
-                    sx={{
-                      background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                      color: "white",
-                      px: isMobile ? 2.5 : 3,
-                      py: isMobile ? 1.2 : 1.5,
-                      borderRadius: "12px",
-                      fontWeight: 600,
-                      textTransform: "none",
-                      fontSize: isMobile ? "0.9rem" : "1rem",
-                      boxShadow: "0 8px 24px rgba(99, 102, 241, 0.3)",
-                      minWidth: isSmallMobile ? "100%" : "auto",
-                      "&:hover": {
-                        background: "linear-gradient(135deg, #5855eb, #7c3aed)",
-                        transform: isMobile ? "none" : "translateY(-2px)",
-                        boxShadow: isMobile 
-                          ? "0 8px 24px rgba(99, 102, 241, 0.3)"
-                          : "0 12px 32px rgba(99, 102, 241, 0.4)",
-                      },
-                      transition: "all 0.3s ease",
-                    }}
-                  >
-                    Ver Demo
-                  </Button>
-                )}
-
-                <Button
-                  ref={(el) => (buttonsRef.current[1] = el)}
-                  variant="outlined"
-                  href={project.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  startIcon={<GitHub sx={{ fontSize: isMobile ? "1rem" : "1.25rem" }} />}
-                  size={isMobile ? "medium" : "large"}
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 4 }}>
+            {project.technologies.map((tech, index) => {
+              const color = getTechColor(tech)
+              return (
+                <Chip
+                  key={index}
+                  ref={(el) => (techChipsRef.current[index] = el)}
+                  label={tech}
+                  size="small"
                   sx={{
-                    borderColor: "rgba(255, 255, 255, 0.3)",
-                    color: "rgba(255, 255, 255, 0.9)",
-                    px: isMobile ? 2.5 : 3,
-                    py: isMobile ? 1.2 : 1.5,
-                    borderRadius: "12px",
+                    backgroundColor: `${color}18`,
+                    color: color,
+                    border: `1px solid ${color}30`,
                     fontWeight: 600,
-                    textTransform: "none",
-                    fontSize: isMobile ? "0.9rem" : "1rem",
-                    background: "rgba(255, 255, 255, 0.05)",
-                    backdropFilter: "blur(10px)",
-                    borderWidth: "1.5px",
-                    minWidth: isSmallMobile ? "100%" : "auto",
+                    fontSize: "0.78rem",
+                    height: "28px",
+                    transition: "all 0.2s ease",
                     "&:hover": {
-                      borderColor: "rgba(255, 255, 255, 0.5)",
-                      background: "rgba(255, 255, 255, 0.1)",
-                      transform: isMobile ? "none" : "translateY(-2px)",
-                      boxShadow: isMobile 
-                        ? "none" 
-                        : "0 8px 24px rgba(255, 255, 255, 0.1)",
-                      borderWidth: "1.5px",
+                      backgroundColor: `${color}28`,
+                      transform: "translateY(-1px)",
                     },
-                    transition: "all 0.3s ease",
                   }}
-                >
-                  Ver Código
-                </Button>
-              </Box>
-            </Box>
+                />
+              )
+            })}
+          </Box>
+
+          {/* Action buttons */}
+          <Box sx={{
+            display: "flex",
+            gap: 2,
+            flexDirection: isSmallMobile ? "column" : "row",
+          }}>
+            {project.previewEnabled && (
+              <Button
+                ref={(el) => (buttonsRef.current[0] = el)}
+                variant="contained"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                startIcon={<Launch />}
+                size="large"
+                sx={{
+                  background: `linear-gradient(45deg, ${primaryColor}, ${primaryLight})`,
+                  color: "white",
+                  px: 3,
+                  py: 1.5,
+                  borderRadius: "12px",
+                  fontWeight: 700,
+                  textTransform: "none",
+                  boxShadow: `0 6px 20px rgba(229, 57, 53, 0.3)`,
+                  flex: isSmallMobile ? 1 : "none",
+                  "&:hover": {
+                    background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${primaryColor})`,
+                    transform: "translateY(-2px)",
+                    boxShadow: `0 10px 28px rgba(229, 57, 53, 0.4)`,
+                  },
+                  transition: "all 0.3s ease",
+                }}
+              >
+                {t("modal.viewDemo")}
+              </Button>
+            )}
+
+            <Button
+              ref={(el) => (buttonsRef.current[1] = el)}
+              variant="outlined"
+              href={project.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={<GitHub />}
+              size="large"
+              sx={{
+                borderColor: theme.palette.mode === 'dark'
+                  ? "rgba(255, 255, 255, 0.2)"
+                  : "rgba(0, 0, 0, 0.15)",
+                color: "text.primary",
+                px: 3,
+                py: 1.5,
+                borderRadius: "12px",
+                fontWeight: 700,
+                textTransform: "none",
+                borderWidth: "1.5px",
+                flex: isSmallMobile ? 1 : "none",
+                "&:hover": {
+                  borderColor: primaryColor,
+                  color: primaryColor,
+                  background: `rgba(229, 57, 53, 0.08)`,
+                  borderWidth: "1.5px",
+                  transform: "translateY(-2px)",
+                },
+                transition: "all 0.3s ease",
+              }}
+            >
+              {t("modal.viewRepo")}
+            </Button>
           </Box>
         </Box>
-
-        {/* Espaciado inferior para móvil */}
-        {isMobile && (
-          <Box sx={{ height: "20px", flexShrink: 0 }} />
-        )}
       </DialogContent>
     </Dialog>
   )

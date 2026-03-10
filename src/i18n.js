@@ -128,7 +128,10 @@ const resources = {
       "projects.stellers.description": "Full-stack e-commerce platform powered by NestJS, GraphQL, and Hexagonal Architecture. Features Supabase auth, Prisma ORM, and a Svelte storefront with complete product and store management.",
 
       "projects.clickup.title": "ClickUp Testing Framework",
-      "projects.clickup.description": "Comprehensive API testing suite for ClickUp covering functionality, performance, security, and reliability. Built with Jest, Axios, and clean architecture principles for maintainable test automation."
+      "projects.clickup.description": "Comprehensive API testing suite for ClickUp covering functionality, performance, security, and reliability. Built with Jest, Axios, and clean architecture principles for maintainable test automation.",
+
+      "projects.hotelex.title": "HoteleX",
+      "projects.hotelex.description": "Full-stack hotel management and booking system built with Angular and NestJS. Features intelligent room suggestion engine, advanced search with filters by city, dates, guests and budget, JWT authentication, and a responsive UI with Angular Material."
     }
   },
   es: {
@@ -256,7 +259,10 @@ const resources = {
       "projects.stellers.description": "Plataforma e-commerce full-stack potenciada por NestJS, GraphQL y Arquitectura Hexagonal. Incluye autenticación Supabase, ORM Prisma y storefront en Svelte con gestión completa de productos y tienda.",
 
       "projects.clickup.title": "Framework de Testing ClickUp",
-      "projects.clickup.description": "Suite completa de pruebas API para ClickUp cubriendo funcionalidad, rendimiento, seguridad y confiabilidad. Construida con Jest, Axios y principios de arquitectura limpia para automatización de pruebas mantenible."
+      "projects.clickup.description": "Suite completa de pruebas API para ClickUp cubriendo funcionalidad, rendimiento, seguridad y confiabilidad. Construida con Jest, Axios y principios de arquitectura limpia para automatización de pruebas mantenible.",
+
+      "projects.hotelex.title": "HoteleX",
+      "projects.hotelex.description": "Sistema completo de gestión y reservas hoteleras construido con Angular y NestJS. Incluye motor inteligente de sugerencia de habitaciones, búsqueda avanzada con filtros por ciudad, fechas, huéspedes y presupuesto, autenticación JWT e interfaz responsiva con Angular Material."
     }
   }
 };
