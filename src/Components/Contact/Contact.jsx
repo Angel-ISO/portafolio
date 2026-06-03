@@ -100,12 +100,12 @@ const Contact = () => {
     await new Promise(resolve => setTimeout(resolve, 1000))
 
     const message = encodeURIComponent(
-      `🌟 *Nuevo Contacto desde Portfolio* 🌟\n\n` +
-      `👤 *Nombre:* ${formData.name}\n` +
-      `📧 *Email:* ${formData.email}\n` +
-      `📞 *Teléfono:* ${formData.phone || 'No proporcionado'}\n` +
-      `📋 *Asunto:* ${formData.subject}\n\n` +
-      `💬 *Mensaje:*\n${formData.message}\n\n` +
+      `*Nuevo contacto desde el portafolio*\n\n` +
+      `*Nombre:* ${formData.name}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Telefono:* ${formData.phone || 'No proporcionado'}\n` +
+      `*Asunto:* ${formData.subject}\n\n` +
+      `*Mensaje:*\n${formData.message}\n\n` +
       `---\nEnviado desde angelbladeX.dev`
     )
 
@@ -170,18 +170,20 @@ const Contact = () => {
       id="contact" 
       ref={sectionRef}
       sx={{ 
-        py: 10,
+        py: { xs: 9, md: 13 },
         position: "relative",
         overflow: "hidden",
+        borderBottom: "1px solid",
+        borderColor: "divider",
         "&::before": {
           content: '""',
           position: "absolute",
           top: 0,
           left: "50%",
           transform: "translateX(-50%)",
-          width: "200px",
-          height: "4px",
-          background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
+          width: "120px",
+          height: "1px",
+          backgroundColor: "primary.main",
         },
       }}
     >
@@ -191,24 +193,19 @@ const Contact = () => {
             variant="h3"
             component="h2"
             gutterBottom
-            fontWeight="bold"
             sx={{
-              background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.light} 90%)`,
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: "text.primary",
               mb: 2,
               position: "relative",
               "&::after": {
                 content: '""',
                 position: "absolute",
-                bottom: -10,
+                bottom: -12,
                 left: "50%",
                 transform: "translateX(-50%)",
-                width: "60px",
-                height: "4px",
+                width: "36px",
+                height: "1px",
                 background: theme.palette.primary.main,
-                borderRadius: "2px",
               },
             }}
           >
@@ -231,19 +228,15 @@ const Contact = () => {
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Paper
             ref={formRef}
-            elevation={8}
+            elevation={0}
             sx={{
               p: { xs: 3, md: 5 },
               width: '100%',
               maxWidth: '700px',
-              background: theme.palette.mode === 'dark'
-                ? "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)"
-                : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
-              backdropFilter: "blur(10px)",
-              border: theme.palette.mode === 'dark'
-                ? "1px solid rgba(255,255,255,0.1)"
-                : "1px solid rgba(229, 57, 53, 0.1)",
-              borderRadius: 3,
+              backgroundColor: "background.paper",
+              border: "1px solid",
+              borderColor: "divider",
+              borderRadius: 1.5,
               position: "relative",
               overflow: "hidden",
               "&::before": {
@@ -252,14 +245,14 @@ const Contact = () => {
                 top: 0,
                 left: 0,
                 right: 0,
-                height: "4px",
-                background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                height: "2px",
+                background: theme.palette.primary.main,
               },
             }}
           >
             <Typography
               variant="h5"
-              fontWeight="bold"
+              fontWeight={650}
               color="text.primary"
               sx={{ mb: 4, textAlign: 'center' }}
             >
@@ -434,6 +427,7 @@ const Contact = () => {
                 <Button
                   ref={el => fieldRefs.current[5] = el}
                   type="submit"
+                  variant="contained"
                   size="large"
                   fullWidth
                   disabled={isSubmitting}
@@ -441,25 +435,17 @@ const Contact = () => {
                   sx={{
                     gridColumn: '1 / -1',
                     py: 2,
-                    borderRadius: 3,
                     textTransform: "none",
-                    fontWeight: "bold",
+                    fontWeight: 650,
                     fontSize: "1.1rem",
-                    background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                    color: "white",
-                    boxShadow: `0 8px 24px rgba(229, 57, 53, 0.3)`,
                     "&:hover": {
-                      background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-                      transform: "translateY(-2px)",
-                      boxShadow: `0 12px 32px rgba(229, 57, 53, 0.4)`,
+                      transform: "translateY(-1px)",
                     },
                     "&:disabled": {
-                      background: "rgba(0,0,0,0.3)",
+                      background: "rgba(0,0,0,0.22)",
                       color: "rgba(255,255,255,0.7)",
-                      boxShadow: "none",
                       transform: "none",
                     },
-                    transition: "all 0.3s ease",
                   }}
                 >
                   {isSubmitting ? t("contact.sending") : t("contact.sendButton")}

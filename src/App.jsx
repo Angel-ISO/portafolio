@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { ThemeProvider, CssBaseline, Box } from "@mui/material";
 import { useThemeMode } from "./hooks/useThemeMode";
 import Header from "./Components/Head/Header";
@@ -10,9 +9,9 @@ import Projects from "./Components/Projects/Projects";
 import Contact from "./Components/Contact/Contact";
 import Footer from "./Components/Foot/Footer";
 import ProjectModal from "./Components/Projects/ProjectModal";
+import LineWaves from "./component/LineWaves";
 
 function App() {
-  const { t } = useTranslation();
   const { theme, mode, toggleMode } = useThemeMode();
   const [openModal, setOpenModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -35,25 +34,38 @@ function App() {
           minHeight: "100vh",
           width: "100%",
           position: "relative",
-          "&::before": {
-            content: '""',
-            position: "absolute",
-            inset: 0,
-            zIndex: 0,
-            background: mode === "dark"
-              ? "radial-gradient(125% 125% at 50% 100%, #000000 40%, #2b0707 100%)"
-              : "radial-gradient(125% 125% at 50% 100%, #ffffff 40%, #ffeaea 100%)",
-          },
+          backgroundColor: "background.default",
         }}
       >
         <Box sx={{ position: "relative", zIndex: 1 }}>
           <Header mode={mode} toggleMode={toggleMode} />
-          <Hero />
-          <About />
-          <Technologies />
-          <Projects handleOpenModal={handleOpenModal} />
-          <Contact />
-          <Footer />
+          <Box sx={{ position: "relative", overflow: "hidden" }}>
+            <Box sx={{ position: "absolute", inset: 0, zIndex: 0, opacity: mode === "dark" ? 0.45 : 0.28 }}>
+              <LineWaves
+                speed={0.3}
+                innerLineCount={32}
+                outerLineCount={36}
+                warpIntensity={1}
+                rotation={-45}
+                edgeFadeWidth={0}
+                colorCycleSpeed={1}
+                brightness={0.2}
+                color1="#ffffff"
+                color2="#ffffff"
+                color3="#ffffff"
+                enableMouseInteraction
+                mouseInfluence={2}
+              />
+            </Box>
+            <Box sx={{ position: "relative", zIndex: 1 }}>
+              <Hero />
+              <About />
+              <Technologies />
+              <Projects handleOpenModal={handleOpenModal} />
+              <Contact />
+              <Footer />
+            </Box>
+          </Box>
           <ProjectModal
             open={openModal}
             handleClose={handleCloseModal}

@@ -103,9 +103,10 @@ export const projects = (t) => [
         description: t("projects.pathfinder.description"),
         image: PathfinderImage,
         technologies: ["Functional Programming", "Material UI", "Node.js", "React", "Leaflet.js", "Redis", "MongoDb", "JavaScript", "Intelligent Cache Management", "Haversine Equation", "A* Algorithm"],
-        link: "https://pathfinderx.stellarco.online",
+        link: "https://pathfinderx-kyzp.onrender.com/",
         repo: "https://github.com/Angel-ISO/Pathfinder",
         previewEnabled: true,
+        highlighted: true,
       },
       {
         title: t("projects.pilex.title"),
@@ -124,6 +125,7 @@ export const projects = (t) => [
         link: "https://unstables.devops.jala.university/",
         repo: "https://github.com/Angel-ISO/Stellers-Ecomerce",
         previewEnabled: true,
+        highlighted: true,
       },
       {
         title: t("projects.clickup.title"),
@@ -142,6 +144,7 @@ export const projects = (t) => [
         link: "https://hotelexfront.onrender.com/",
         repo: "https://github.com/Angel-ISO/HoteleX",
         previewEnabled: true,
+        highlighted: true,
       }
 
 ]

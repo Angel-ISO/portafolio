@@ -32,16 +32,16 @@ const Header = ({ mode, toggleMode }) => {
       position="sticky"
       elevation={0}
       sx={{
-        backdropFilter: "blur(12px)",
-        backgroundColor: (theme) =>
+        backdropFilter: "blur(14px)",
+        backgroundColor:
           mode === "dark"
-            ? "rgba(18, 18, 18, 0.8)"
-            : "rgba(255, 255, 255, 0.8)",
+            ? "rgba(17, 16, 15, 0.82)"
+            : "rgba(247, 245, 241, 0.84)",
         borderBottom: "1px solid",
         borderColor: "divider",
       }}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", minHeight: { xs: 64, md: 72 }, px: { xs: 2, md: 4 } }}>
          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           <Slide direction="right" in={true} timeout={800}>
             <img
@@ -50,13 +50,13 @@ const Header = ({ mode, toggleMode }) => {
               style={{
                 width: 40,
                 height: 40,
-                transition: "transform 0.3s ease",
+                transition: "transform 0.2s ease",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = "rotate(15deg) scale(1.1)")
+                (e.currentTarget.style.transform = "translateY(-1px)")
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "rotate(0) scale(1)")
+                (e.currentTarget.style.transform = "translateY(0)")
               }
             />
           </Slide>
@@ -66,10 +66,8 @@ const Header = ({ mode, toggleMode }) => {
             component="div"
             sx={{
               color: "text.primary",
-              textShadow:
-                mode === "dark"
-                  ? "0 1px 2px rgba(0,0,0,0.7)"
-                  : "0 1px 2px rgba(255,255,255,0.7)",
+              fontWeight: 700,
+              letterSpacing: "-0.01em",
             }}
           >
             {t("navbar.title")}
@@ -88,22 +86,24 @@ const Header = ({ mode, toggleMode }) => {
                   fontSize: "0.9rem",
                   color: "text.secondary",
                   textTransform: "none",
+                  borderRadius: 1,
+                  px: 1.5,
                   position: "relative",
                   "&::after": {
                     content: '""',
                     position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "2px",
+                    bottom: 6,
+                    left: 12,
+                    right: 12,
+                    height: "1px",
                     backgroundColor: "primary.main",
                     transform: "scaleX(0)",
-                    transformOrigin: "center",
-                    transition: "transform 0.3s ease",
+                    transformOrigin: "left",
+                    transition: "transform 0.2s ease",
                   },
                   "&:hover": {
                     color: "text.primary",
-                    backgroundColor: "transparent",
+                    backgroundColor: "action.hover",
                     "&::after": {
                       transform: "scaleX(1)",
                     },
@@ -120,18 +120,18 @@ const Header = ({ mode, toggleMode }) => {
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
           {/* Hamburger menu - mobile */}
           {isMobile && (
-            <IconButton onClick={() => setDrawerOpen(true)}>
+            <IconButton onClick={() => setDrawerOpen(true)} sx={{ border: "1px solid", borderColor: "divider", borderRadius: 1.5 }}>
               <MenuIcon sx={{ color: "text.primary" }} />
             </IconButton>
           )}
 
           {/* Botón de tema - desktop only */}
           {!isMobile && (
-            <IconButton onClick={toggleMode}>
+            <IconButton onClick={toggleMode} sx={{ border: "1px solid", borderColor: "divider", borderRadius: 1.5 }}>
               {mode === "dark" ? (
-                <Brightness7 sx={{ color: "#ff6f60" }} /> // Sol naranja
+                <Brightness7 sx={{ color: "primary.light" }} />
               ) : (
-                <Brightness4 sx={{ color: "#e53935" }} /> // Luna roja
+                <Brightness4 sx={{ color: "primary.main" }} />
               )}
             </IconButton>
           )}
@@ -148,8 +148,10 @@ const Header = ({ mode, toggleMode }) => {
         onClose={() => setDrawerOpen(false)}
         PaperProps={{
           sx: {
-            width: 250,
-            backgroundColor: mode === "dark" ? "#121212" : "#ffffff",
+            width: 280,
+            backgroundColor: "background.paper",
+            borderLeft: "1px solid",
+            borderColor: "divider",
           },
         }}
       >
@@ -173,11 +175,11 @@ const Header = ({ mode, toggleMode }) => {
             ))}
           </List>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, px: 2, pt: 1 }}>
-            <IconButton onClick={toggleMode}>
+            <IconButton onClick={toggleMode} sx={{ border: "1px solid", borderColor: "divider", borderRadius: 1.5 }}>
               {mode === "dark" ? (
-                <Brightness7 sx={{ color: "#ff6f60" }} />
+                <Brightness7 sx={{ color: "primary.light" }} />
               ) : (
-                <Brightness4 sx={{ color: "#e53935" }} />
+                <Brightness4 sx={{ color: "primary.main" }} />
               )}
             </IconButton>
             <LanguageSelector />

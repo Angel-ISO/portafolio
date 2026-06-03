@@ -5,7 +5,6 @@ import {
   Typography, 
   IconButton,
   Divider,
-  useTheme,
   Paper
 } from "@mui/material"
 import { 
@@ -22,7 +21,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Footer = () => {
   const { t } = useTranslation()
-  const theme = useTheme()
   const footerRef = useRef()
   const contentRef = useRef()
   const socialRef = useRef()
@@ -32,19 +30,19 @@ const Footer = () => {
       icon: <GitHub />,
       url: "https://github.com/Angel-ISO",
       label: "GitHub",
-      color: "#333"
+      color: "text.primary"
     },
     {
       icon: <LinkedIn />,
       url: "https://www.linkedin.com/in/angel-gabriel-ortega/",
       label: "LinkedIn", 
-      color: "#0077B5"
+      color: "primary.main"
     },
     {
       icon: <Email />,
       url: "mailto:angelgabrielorteg@gmail.com",
       label: "Email",
-      color: "#EA4335"
+      color: "primary.main"
     }
   ]
 
@@ -87,10 +85,10 @@ const Footer = () => {
       sx={{
         position: "relative",
         overflow: "hidden",
-        background: theme.palette.mode === 'dark'
-          ? "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)"
-          : "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)",
-        color: "white",
+        backgroundColor: "background.paper",
+        color: "text.primary",
+        borderTop: "1px solid",
+        borderColor: "divider",
         "&::before": {
           content: '""',
           position: "absolute",
@@ -98,7 +96,7 @@ const Footer = () => {
           left: 0,
           right: 0,
           height: "1px",
-          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+          background: "transparent",
         },
         "&::after": {
           content: '""',
@@ -106,9 +104,9 @@ const Footer = () => {
           top: -50,
           left: "50%",
           transform: "translateX(-50%)",
-          width: "200px",
-          height: "4px",
-          background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
+          width: "120px",
+          height: "1px",
+          backgroundColor: "primary.main",
         },
       }}
     >
@@ -120,10 +118,7 @@ const Footer = () => {
                 variant="h4"
                 fontWeight="bold"
                 sx={{
-                  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "text.primary",
                   mb: 2,
                 }}
               >
@@ -132,7 +127,7 @@ const Footer = () => {
               <Typography
                 variant="body1"
                 sx={{
-                  color: "rgba(255,255,255,0.8)",
+                  color: "text.secondary",
                   lineHeight: 1.6,
                   mb: 2,
                 }}
@@ -140,7 +135,7 @@ const Footer = () => {
                 {t("footer.description")}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
-                <Typography variant="body2" color="rgba(255,255,255,0.7)">
+                <Typography variant="body2" color="text.secondary">
                   Bucaramanga, Colombia
                 </Typography>
               </Box>
@@ -151,7 +146,7 @@ const Footer = () => {
                 <Typography
                   variant="h6"
                   fontWeight="bold"
-                  sx={{ mb: 3, color: "rgba(255,255,255,0.9)" }}
+                  sx={{ mb: 3, color: "text.primary" }}
                 >
                   {t("footer.connect")}
                 </Typography>
@@ -167,13 +162,13 @@ const Footer = () => {
                   {socialLinks.map((social, index) => (
                     <Paper
                       key={index}
-                      elevation={4}
+                      elevation={0}
                       sx={{
-                        borderRadius: "50%",
+                        borderRadius: 1.5,
                         overflow: "hidden",
-                        background: "rgba(255,255,255,0.1)",
-                        backdropFilter: "blur(10px)",
-                        border: "1px solid rgba(255,255,255,0.1)",
+                        backgroundColor: "background.default",
+                        border: "1px solid",
+                        borderColor: "divider",
                       }}
                     >
                       <IconButton
@@ -182,13 +177,13 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         aria-label={social.label}
                         sx={{
-                          color: "white",
+                          color: "text.primary",
                           p: 1.5,
-                          transition: "all 0.3s ease",
+                          transition: "transform 0.2s ease, color 0.2s ease, background-color 0.2s ease",
                           "&:hover": {
                             color: social.color,
-                            transform: "translateY(-3px) scale(1.1)",
-                            background: "rgba(255,255,255,0.1)",
+                            transform: "translateY(-1px)",
+                            backgroundColor: "action.hover",
                           },
                         }}
                       >
@@ -204,16 +199,16 @@ const Footer = () => {
           <Divider 
             sx={{ 
               my: 4, 
-              borderColor: "rgba(255,255,255,0.1)",
+              borderColor: "divider",
               "&::before, &::after": {
-                borderColor: "rgba(255,255,255,0.1)",
+                borderColor: "divider",
               }
             }} 
           />
 
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
-              <Typography variant="body2" color="rgba(255,255,255,0.7)" textAlign="center">
+              <Typography variant="body2" color="text.secondary" textAlign="center">
                 {t("footer.copyright", { year: new Date().getFullYear() })}
               </Typography>
             </Grid>
@@ -228,7 +223,7 @@ const Footer = () => {
           left: 0,
           right: 0,
           height: "100px",
-          background: `radial-gradient(ellipse at center, rgba(${theme.palette.primary.main.replace('#', '')}, 0.1) 0%, transparent 70%)`,
+          background: "transparent",
           pointerEvents: "none",
         }}
       />

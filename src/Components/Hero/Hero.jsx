@@ -1,18 +1,17 @@
-import { Box, Container, Grid, Typography, Button, Avatar, Chip } from "@mui/material"
+import { Box, Container, Grid, Typography, Button } from "@mui/material"
 import { ArrowForward, Download } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
-import MeImg from "../../assets/Angel.jpeg"
+import MeImg from "../../assets/Angel2.png"
 import CV from "../../assets/Angel_Gabriel_Ortega_Backend_Engineer_CV.pdf"
+import ProfileCard from "../../component/ProfileCard"
 
 const Hero = () => {
   const { t } = useTranslation()
   const heroRef = useRef()
   const avatarRef = useRef()
-  const greetingRef = useRef()
   const titleRef = useRef()
-  const roleRef = useRef()
   const subtitleRef = useRef()
   const buttonRef = useRef()
 
@@ -28,25 +27,11 @@ const Hero = () => {
         ease: "back.out(1.7)"
       })
 
-      tl.from(greetingRef.current, {
-        duration: 0.6,
-        y: 20,
-        opacity: 0,
-        ease: "power2.out"
-      }, "-=0.5")
-
       tl.from(titleRef.current, {
         duration: 0.8,
         y: 40,
         opacity: 0,
         ease: "power2.out"
-      }, "-=0.3")
-
-      tl.from(roleRef.current, {
-        duration: 0.6,
-        scale: 0.8,
-        opacity: 0,
-        ease: "back.out(1.7)"
       }, "-=0.3")
 
       tl.from(subtitleRef.current, {
@@ -63,24 +48,6 @@ const Hero = () => {
         ease: "power2.out"
       }, "-=0.3")
 
-      avatarRef.current?.addEventListener('mouseenter', () => {
-        gsap.to(avatarRef.current, {
-          duration: 0.3,
-          scale: 1.03,
-          boxShadow: '0 8px 25px rgba(229, 57, 53, 0.3)',
-          ease: "power2.out"
-        })
-      })
-
-      avatarRef.current?.addEventListener('mouseleave', () => {
-        gsap.to(avatarRef.current, {
-          duration: 0.3,
-          scale: 1,
-          boxShadow: '0 4px 15px rgba(229, 57, 53, 0.15)',
-          ease: "power2.out"
-        })
-      })
-
     }, heroRef)
 
     return () => ctx.revert()
@@ -90,16 +57,18 @@ const Hero = () => {
     <Box
       ref={heroRef}
       sx={{
-        py: { xs: 6, md: 10 },
-        minHeight: { md: '80vh' },
+        py: { xs: 7, md: 12 },
+        minHeight: { md: '78vh' },
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        borderBottom: "1px solid",
+        borderColor: "divider",
       }}
     >
       <Container>
-        <Grid container spacing={4} alignItems="center">
+        <Grid container spacing={{ xs: 5, md: 8 }} alignItems="center">
           <Grid
             item
             xs={12}
@@ -111,39 +80,25 @@ const Hero = () => {
               order: { xs: 1, sm: 1 },
             }}
           >
-            <Box sx={{ position: 'relative' }}>
-              <Avatar
-                ref={avatarRef}
-                src={MeImg}
-                alt="Angel Gabriel Ortega"
-                sx={{
-                  width: { xs: 200, sm: 220, md: 280 },
-                  height: { xs: 200, sm: 220, md: 280 },
-                  border: "4px solid",
-                  borderColor: "primary.main",
-                  cursor: "pointer",
-                  boxShadow: '0 4px 15px rgba(229, 57, 53, 0.15)'
+            <Box ref={avatarRef} sx={{ position: 'relative' }}>
+              <ProfileCard
+                name="Angel Gabriel Ortega"
+                title="Backend Engineer"
+                handle="angel-iso"
+                status="Available"
+                contactText={t("hero.contact")}
+                avatarUrl={MeImg}
+                showUserInfo={false}
+                enableTilt
+                enableMobileTilt={false}
+                onContactClick={() => {
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
                 }}
-              />
-              <Box
-                sx={{
-                  position: 'absolute',
-                  bottom: 10,
-                  right: -10,
-                  width: 20,
-                  height: 20,
-                  borderRadius: '50%',
-                  bgcolor: '#4caf50',
-                  border: '3px solid',
-                  borderColor: 'background.default',
-                  boxShadow: '0 0 0 2px #4caf50',
-                  animation: 'pulse 2s infinite',
-                  '@keyframes pulse': {
-                    '0%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0.4)' },
-                    '70%': { boxShadow: '0 0 0 10px rgba(76, 175, 80, 0)' },
-                    '100%': { boxShadow: '0 0 0 0 rgba(76, 175, 80, 0)' },
-                  }
-                }}
+                behindGlowColor="rgba(125, 190, 255, 0.67)"
+                iconUrl="/assets/demo/iconpattern.svg"
+                grainUrl="/assets/demo/grain.svg"
+                behindGlowEnabled={false}
+                innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
               />
             </Box>
           </Grid>
@@ -156,24 +111,29 @@ const Hero = () => {
               order: { xs: 2, sm: 2 },
             }}
           >
-           
+            <Typography
+              variant="overline"
+              sx={{
+                display: "block",
+                mb: 1.5,
+                color: "primary.main",
+                fontWeight: 700,
+                letterSpacing: "0.12em",
+              }}
+            >
+              Backend Engineer
+            </Typography>
 
             <Typography
               ref={titleRef}
-              variant="h2"
+              variant="h1"
               component="h1"
               gutterBottom
-              fontWeight="bold"
               sx={{
-                fontSize: { xs: "2rem", sm: "2.5rem", md: "3.75rem" },
-                lineHeight: 1.2,
+                fontSize: { xs: "2.7rem", sm: "3.4rem", md: "4.8rem" },
                 mb: 2,
-                background: (theme) => theme.palette.mode === 'dark'
-                  ? 'linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #ff6f60 100%)'
-                  : 'linear-gradient(135deg, #1a1a2e 0%, #212121 50%, #e53935 100%)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
+                color: "text.primary",
+                maxWidth: 680,
               }}
             >
               {t("hero.title")}
@@ -187,8 +147,8 @@ const Hero = () => {
               sx={{
                 fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.25rem" },
                 mb: 4,
-                lineHeight: 1.8,
-                maxWidth: '550px',
+                lineHeight: 1.7,
+                maxWidth: '620px',
                 fontWeight: 400
               }}
             >
@@ -205,14 +165,9 @@ const Hero = () => {
                 sx={{
                   px: 4,
                   py: 1.5,
-                  borderRadius: '50px',
-                  fontWeight: 'bold',
-                  boxShadow: '0 4px 12px rgba(229, 57, 53, 0.25)',
                   cursor: 'pointer',
-                  transition: 'all 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-3px)',
-                    boxShadow: '0 8px 20px rgba(229, 57, 53, 0.4)',
+                    transform: 'translateY(-1px)',
                   }
                 }}
               >
@@ -228,15 +183,9 @@ const Hero = () => {
                 sx={{
                   px: 4,
                   py: 1.5,
-                  borderRadius: '50px',
-                  fontWeight: 'bold',
-                  borderWidth: 2,
                   cursor: 'pointer',
-                  transition: 'all 0.3s ease',
                   '&:hover': {
-                    borderWidth: 2,
-                    transform: 'translateY(-3px)',
-                    boxShadow: '0 8px 20px rgba(229, 57, 53, 0.2)',
+                    transform: 'translateY(-1px)',
                   }
                 }}
               >

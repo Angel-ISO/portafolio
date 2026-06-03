@@ -91,8 +91,6 @@ const ProjectModal = ({ open, handleClose, project }) => {
   if (!project) return null
 
   const primaryColor = theme.palette.primary.main
-  const primaryLight = theme.palette.primary.light
-
   return (
     <Dialog
       open={open}
@@ -113,8 +111,8 @@ const ProjectModal = ({ open, handleClose, project }) => {
       BackdropComponent={Backdrop}
       BackdropProps={{
         sx: {
-          backgroundColor: "rgba(0, 0, 0, 0.85)",
-          backdropFilter: "blur(12px)",
+          backgroundColor: theme.palette.mode === "dark" ? "rgba(0, 0, 0, 0.78)" : "rgba(32, 26, 23, 0.34)",
+          backdropFilter: "blur(8px)",
         },
       }}
     >
@@ -122,12 +120,10 @@ const ProjectModal = ({ open, handleClose, project }) => {
         ref={contentRef}
         sx={{
           p: 0,
-          background: theme.palette.mode === 'dark'
-            ? "linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(18, 18, 18, 0.98) 100%)"
-            : "linear-gradient(135deg, rgba(255, 255, 255, 0.97) 0%, rgba(245, 245, 245, 0.98) 100%)",
-          backdropFilter: "blur(20px)",
-          border: isMobile ? "none" : `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : 'rgba(229,57,53,0.15)'}`,
-          borderRadius: isMobile ? 0 : "20px",
+          backgroundColor: "background.paper",
+          border: isMobile ? "none" : "1px solid",
+          borderColor: "divider",
+          borderRadius: isMobile ? 0 : 1.5,
           overflow: "auto",
           position: "relative",
           maxHeight: isMobile ? "100vh" : "90vh",
@@ -136,7 +132,7 @@ const ProjectModal = ({ open, handleClose, project }) => {
           "&::-webkit-scrollbar": { width: "6px" },
           "&::-webkit-scrollbar-track": { background: "transparent" },
           "&::-webkit-scrollbar-thumb": {
-            background: `linear-gradient(135deg, ${primaryColor}, ${primaryLight})`,
+            background: primaryColor,
             borderRadius: "3px",
           },
           "&::before": {
@@ -145,8 +141,8 @@ const ProjectModal = ({ open, handleClose, project }) => {
             top: 0,
             left: 0,
             right: 0,
-            height: "3px",
-            background: `linear-gradient(90deg, ${primaryColor}, ${primaryLight})`,
+            height: "2px",
+            background: primaryColor,
             zIndex: 2,
           },
         }}
@@ -159,17 +155,18 @@ const ProjectModal = ({ open, handleClose, project }) => {
             top: isMobile ? 10 : 14,
             right: isMobile ? 10 : 14,
             zIndex: 10,
-            background: theme.palette.mode === 'dark'
-              ? "rgba(255, 255, 255, 0.08)"
-              : "rgba(0, 0, 0, 0.05)",
+            backgroundColor: "background.paper",
+            border: "1px solid",
+            borderColor: "divider",
             color: "text.primary",
             width: 38,
             height: 38,
+            borderRadius: 1.5,
             "&:hover": {
-              background: `rgba(229, 57, 53, 0.15)`,
+              backgroundColor: theme.palette.mode === "dark" ? "rgba(217,72,61,0.12)" : "rgba(180,35,24,0.06)",
               color: primaryColor,
             },
-            transition: "all 0.2s ease",
+            transition: "background-color 0.2s ease, color 0.2s ease",
           }}
         >
           <Close sx={{ fontSize: "1.2rem" }} />
@@ -182,18 +179,8 @@ const ProjectModal = ({ open, handleClose, project }) => {
             position: "relative",
             overflow: "hidden",
             flexShrink: 0,
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: "60px",
-              background: theme.palette.mode === 'dark'
-                ? "linear-gradient(to top, rgba(30,30,30,1) 0%, transparent 100%)"
-                : "linear-gradient(to top, rgba(255,255,255,1) 0%, transparent 100%)",
-              pointerEvents: "none",
-            },
+            borderBottom: "1px solid",
+            borderColor: "divider",
           }}
         >
           <img
@@ -214,8 +201,10 @@ const ProjectModal = ({ open, handleClose, project }) => {
                 position: "absolute",
                 top: 14,
                 left: 14,
-                backgroundColor: theme.palette.success.main,
-                color: "white",
+                backgroundColor: theme.palette.mode === "dark" ? "rgba(52,101,56,0.25)" : "#edf3ec",
+                color: theme.palette.success.main,
+                border: "1px solid",
+                borderColor: "rgba(52,101,56,0.22)",
                 fontWeight: 700,
                 fontSize: "0.7rem",
                 height: "24px",
@@ -225,7 +214,7 @@ const ProjectModal = ({ open, handleClose, project }) => {
                   width: 6,
                   height: 6,
                   borderRadius: '50%',
-                  backgroundColor: '#fff',
+                  backgroundColor: theme.palette.success.main,
                   marginRight: '6px',
                   animation: 'pulse 2s infinite',
                   '@keyframes pulse': {
@@ -244,7 +233,7 @@ const ProjectModal = ({ open, handleClose, project }) => {
           <Typography
             variant={isMobile ? "h5" : "h4"}
             sx={{
-              fontWeight: 800,
+              fontWeight: 650,
               mb: 2,
               color: "text.primary",
               lineHeight: 1.2,
@@ -293,13 +282,12 @@ const ProjectModal = ({ open, handleClose, project }) => {
                     backgroundColor: `${color}18`,
                     color: color,
                     border: `1px solid ${color}30`,
-                    fontWeight: 600,
+                    fontWeight: 650,
                     fontSize: "0.78rem",
                     height: "28px",
                     transition: "all 0.2s ease",
                     "&:hover": {
                       backgroundColor: `${color}28`,
-                      transform: "translateY(-1px)",
                     },
                   }}
                 />
@@ -323,21 +311,14 @@ const ProjectModal = ({ open, handleClose, project }) => {
                 startIcon={<Launch />}
                 size="large"
                 sx={{
-                  background: `linear-gradient(45deg, ${primaryColor}, ${primaryLight})`,
-                  color: "white",
                   px: 3,
                   py: 1.5,
-                  borderRadius: "12px",
-                  fontWeight: 700,
+                  fontWeight: 650,
                   textTransform: "none",
-                  boxShadow: `0 6px 20px rgba(229, 57, 53, 0.3)`,
                   flex: isSmallMobile ? 1 : "none",
                   "&:hover": {
-                    background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${primaryColor})`,
-                    transform: "translateY(-2px)",
-                    boxShadow: `0 10px 28px rgba(229, 57, 53, 0.4)`,
+                    transform: "translateY(-1px)",
                   },
-                  transition: "all 0.3s ease",
                 }}
               >
                 {t("modal.viewDemo")}
@@ -359,19 +340,17 @@ const ProjectModal = ({ open, handleClose, project }) => {
                 color: "text.primary",
                 px: 3,
                 py: 1.5,
-                borderRadius: "12px",
-                fontWeight: 700,
+                fontWeight: 650,
                 textTransform: "none",
                 borderWidth: "1.5px",
                 flex: isSmallMobile ? 1 : "none",
                 "&:hover": {
                   borderColor: primaryColor,
                   color: primaryColor,
-                  background: `rgba(229, 57, 53, 0.08)`,
+                  background: theme.palette.mode === "dark" ? "rgba(217,72,61,0.1)" : "rgba(180,35,24,0.06)",
                   borderWidth: "1.5px",
-                  transform: "translateY(-2px)",
+                  transform: "translateY(-1px)",
                 },
-                transition: "all 0.3s ease",
               }}
             >
               {t("modal.viewRepo")}

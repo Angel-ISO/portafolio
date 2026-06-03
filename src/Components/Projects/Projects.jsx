@@ -12,20 +12,20 @@ import {
 } from "@mui/material"
 import { GitHub, Launch, Code, Star } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { projects } from "../../utils/constants"
 import { useTheme } from "@mui/material/styles"
+import ElectricBorder from "../ElectricBorder/ElectricBorder"
 
 gsap.registerPlugin(ScrollTrigger)
 
 const Projects = ({ handleOpenModal }) => {
   const { t } = useTranslation()
   const theme = useTheme()
-  const projectList = projects(t)
+  const projectList = useMemo(() => projects(t), [t])
   const [imagesLoaded, setImagesLoaded] = useState(false)
-  const [loadedImages, setLoadedImages] = useState(0)
 
   const sectionRef = useRef()
   const titleRef = useRef()
@@ -72,28 +72,237 @@ const Projects = ({ handleOpenModal }) => {
     return techColors[tech] || theme.palette.primary.main
   }
 
-  const handleImageLoad = () => {
-    setLoadedImages(prev => {
-      const newCount = prev + 1
-      if (newCount >= projectList.length) {
-        setImagesLoaded(true)
-      }
-      return newCount
-    })
+  const renderProjectCard = (project) => {
+    const accentColor = getTechColor(project.technologies[0])
+
+    return (
+      <Card
+        onClick={() => handleOpenModal(project)}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          cursor: "pointer",
+          borderRadius: 1.5,
+          overflow: "hidden",
+          position: "relative",
+          backgroundColor: "background.paper",
+          border: "1px solid",
+          borderColor: project.highlighted ? "transparent" : "divider",
+          transition: "transform 0.2s ease, border-color 0.2s ease",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "2px",
+            background: accentColor,
+            transform: "scaleX(0)",
+            transformOrigin: "left",
+            transition: "transform 0.3s ease",
+          },
+          "&:hover": {
+            transform: "translateY(-3px)",
+            borderColor: project.highlighted ? "transparent" : theme.palette.primary.main,
+            "&::before": {
+              transform: project.highlighted ? "scaleX(0)" : "scaleX(1)",
+            },
+            "& .project-image": {
+              transform: "scale(1.04)",
+            },
+            "& .project-title": {
+              color: theme.palette.primary.main,
+            },
+          },
+        }}
+      >
+        <Box sx={{ position: "relative", overflow: "hidden" }}>
+          <CardMedia
+            component="img"
+            height="200"
+            image={project.image}
+            alt={project.title}
+            className="project-image"
+            sx={{
+              objectFit: "cover",
+              transition: "transform 0.5s ease",
+            }}
+          />
+          {project.highlighted && (
+            <Chip
+              label="Featured"
+              size="small"
+              sx={{
+                position: "absolute",
+                top: 12,
+                left: 12,
+                backgroundColor: theme.palette.mode === "dark" ? "rgba(180,35,24,0.22)" : "#fdebec",
+                color: "primary.main",
+                border: "1px solid",
+                borderColor: "rgba(180,35,24,0.22)",
+                fontWeight: 700,
+                fontSize: "0.7rem",
+              }}
+            />
+          )}
+          {project.previewEnabled && (
+            <Chip
+              label="Live Demo"
+              size="small"
+              sx={{
+                position: "absolute",
+                top: 12,
+                right: 12,
+                backgroundColor: theme.palette.mode === "dark" ? "rgba(52,101,56,0.25)" : "#edf3ec",
+                color: theme.palette.success.main,
+                border: "1px solid",
+                borderColor: "rgba(52,101,56,0.22)",
+                fontWeight: 700,
+                fontSize: "0.7rem",
+              }}
+            />
+          )}
+        </Box>
+
+        <CardContent
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h3"
+            className="project-title"
+            sx={{
+              fontWeight: 650,
+              transition: "color 0.3s ease",
+              mb: 2,
+              color: theme.palette.text.primary,
+            }}
+          >
+            {project.title}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              display: "-webkit-box",
+              overflow: "hidden",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 3,
+              mb: 3,
+              flexGrow: 1,
+              lineHeight: 1.6,
+            }}
+          >
+            {project.description}
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 1,
+              mt: "auto",
+            }}
+          >
+            {project.technologies.slice(0, 3).map((tech, i) => (
+              <Chip
+                key={i}
+                label={tech}
+                size="small"
+                sx={{
+                  backgroundColor: `${getTechColor(tech)}15`,
+                  color: getTechColor(tech),
+                  fontWeight: 650,
+                  fontSize: "0.75rem",
+                  border: `1px solid ${getTechColor(tech)}30`,
+                  "&:hover": {
+                    backgroundColor: `${getTechColor(tech)}25`,
+                  },
+                }}
+              />
+            ))}
+            {project.technologies.length > 3 && (
+              <Chip
+                label={`+${project.technologies.length - 3}`}
+                size="small"
+                sx={{
+                  backgroundColor: theme.palette.mode === "dark"
+                    ? "rgba(255,255,255,0.08)"
+                    : "rgba(32,26,23,0.06)",
+                  color: theme.palette.primary.main,
+                  fontWeight: 650,
+                }}
+              />
+            )}
+          </Box>
+        </CardContent>
+
+        <CardActions
+          sx={{
+            p: 3,
+            pt: 0,
+            gap: 1,
+          }}
+        >
+          {project.previewEnabled && (
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              startIcon={<Launch />}
+              sx={{
+                textTransform: "none",
+                fontWeight: 650,
+                "&:hover": {
+                  transform: "translateY(-1px)",
+                },
+              }}
+            >
+              {t("modal.viewDemo")}
+            </Button>
+          )}
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            startIcon={<GitHub />}
+            sx={{
+              textTransform: "none",
+              fontWeight: 650,
+              ml: project.previewEnabled ? "auto" : 0,
+              "&:hover": {
+                transform: "translateY(-1px)",
+              },
+            }}
+          >
+            {t("modal.viewRepo")}
+          </Button>
+        </CardActions>
+      </Card>
+    )
   }
 
   useEffect(() => {
     const imagePromises = projectList.map((project) => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const img = new Image()
-        img.onload = () => {
-          handleImageLoad()
-          resolve()
-        }
-        img.onerror = () => {
-          handleImageLoad() 
-          resolve()
-        }
+        img.onload = resolve
+        img.onerror = resolve
         img.src = project.image
       })
     })
@@ -159,18 +368,20 @@ const Projects = ({ handleOpenModal }) => {
       id="projects"
       ref={sectionRef}
       sx={{
-        py: 10,
+        py: { xs: 9, md: 13 },
         position: "relative",
         overflow: "hidden",
+        borderBottom: "1px solid",
+        borderColor: "divider",
         "&::before": {
           content: '""',
           position: "absolute",
           top: 0,
           left: "50%",
           transform: "translateX(-50%)",
-          width: "200px",
-          height: "4px",
-          background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
+          width: "120px",
+          height: "1px",
+          backgroundColor: "primary.main",
         },
       }}
     >
@@ -180,24 +391,19 @@ const Projects = ({ handleOpenModal }) => {
             variant="h3"
             component="h2"
             gutterBottom
-            fontWeight="bold"
             sx={{
-              background: `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.light} 90%)`,
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: "text.primary",
               mb: 2,
               position: "relative",
               "&::after": {
                 content: '""',
                 position: "absolute",
-                bottom: -10,
+                bottom: -12,
                 left: "50%",
                 transform: "translateX(-50%)",
-                width: "60px",
-                height: "4px",
+                width: "36px",
+                height: "1px",
                 background: theme.palette.primary.main,
-                borderRadius: "2px",
               },
             }}
           >
@@ -232,21 +438,18 @@ const Projects = ({ handleOpenModal }) => {
           {projectStats.map((stat, index) => (
             <Paper
               key={index}
-              elevation={8}
+              elevation={0}
               sx={{
                 p: 3,
                 textAlign: "center",
                 minWidth: "140px",
-                background: theme.palette.mode === 'dark' 
-                  ? "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)"
-                  : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
-                backdropFilter: "blur(10px)",
-                border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : `rgba(${theme.palette.primary.main.replace('#', '')}, 0.2)`}`,
-                borderRadius: 3,
-                transition: "all 0.3s ease",
+                backgroundColor: "background.paper",
+                border: "1px solid",
+                borderColor: "divider",
+                borderRadius: 1.5,
+                transition: "transform 0.2s ease, border-color 0.2s ease",
                 "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: `0 15px 35px ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : `rgba(${theme.palette.primary.main.replace('#', '')}, 0.2)`}`,
+                  transform: "translateY(-2px)",
                   borderColor: theme.palette.primary.main,
                 },
               }}
@@ -257,7 +460,7 @@ const Projects = ({ handleOpenModal }) => {
                 component="div"
                 sx={{
                   fontWeight: "bold",
-                  color: theme.palette.primary.main,
+                  color: "text.primary",
                   mb: 1,
                 }}
               >
@@ -286,218 +489,20 @@ const Projects = ({ handleOpenModal }) => {
           }}
         >
           {projectList.map((project, index) => (
-            <Card
-              key={index}
-              onClick={() => handleOpenModal(project)}
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                cursor: "pointer",
-                borderRadius: 3,
-                overflow: "hidden",
-                position: "relative",
-                background: theme.palette.mode === 'dark'
-                  ? "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)"
-                  : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
-                backdropFilter: "blur(10px)",
-                border: theme.palette.mode === 'dark'
-                  ? "1px solid rgba(255,255,255,0.1)"
-                  : `1px solid rgba(${theme.palette.primary.main.replace('#', '')}, 0.1)`,
-                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: "4px",
-                  background: `linear-gradient(90deg, ${getTechColor(project.technologies[0])}, ${getTechColor(project.technologies[1] || project.technologies[0])})`,
-                  transform: "scaleX(0)",
-                  transformOrigin: "left",
-                  transition: "transform 0.3s ease",
-                },
-                "&:hover": {
-                  transform: "translateY(-12px) scale(1.02)",
-                  boxShadow: theme.palette.mode === 'dark'
-                    ? "0 25px 50px rgba(255,255,255,0.1)"
-                    : `0 25px 50px rgba(${theme.palette.primary.main.replace('#', '')}, 0.25)`,
-                  borderColor: theme.palette.primary.main,
-                  "&::before": {
-                    transform: "scaleX(1)",
-                  },
-                  "& .project-image": {
-                    transform: "scale(1.1)",
-                  },
-                  "& .project-title": {
-                    color: theme.palette.primary.main,
-                  },
-                },
-              }}
-            >
-              <Box sx={{ position: "relative", overflow: "hidden" }}>
-                <CardMedia
-                  component="img"
-                  height="200"
-                  image={project.image}
-                  alt={project.title}
-                  className="project-image"
-                  sx={{
-                    objectFit: "cover",
-                    transition: "transform 0.5s ease",
-                  }}
-                />
-                {project.previewEnabled && (
-                  <Chip
-                    label="Live Demo"
-                    size="small"
-                    sx={{
-                      position: "absolute",
-                      top: 12,
-                      right: 12,
-                      backgroundColor: theme.palette.success.main,
-                      color: "white",
-                      fontWeight: "bold",
-                      fontSize: "0.7rem",
-                    }}
-                  />
-                )}
-              </Box>
-
-              <CardContent
-                sx={{
-                  flexGrow: 1,
-                  p: 3,
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="h3"
-                  className="project-title"
-                  sx={{
-                    fontWeight: "bold",
-                    transition: "color 0.3s ease",
-                    mb: 2,
-                    color: theme.palette.text.primary,
-                  }}
+            <Box key={index} sx={{ height: "100%" }}>
+              {project.highlighted ? (
+                <ElectricBorder
+                  speed={1}
+                  chaos={0.12}
+                  thickness={2}
+                  style={{ borderRadius: 16, height: "100%" }}
                 >
-                  {project.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{
-                    display: "-webkit-box",
-                    overflow: "hidden",
-                    WebkitBoxOrient: "vertical",
-                    WebkitLineClamp: 3,
-                    mb: 3,
-                    flexGrow: 1,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {project.description}
-                </Typography>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 1,
-                    mt: "auto",
-                  }}
-                >
-                  {project.technologies.slice(0, 3).map((tech, i) => (
-                    <Chip
-                      key={i}
-                      label={tech}
-                      size="small"
-                      sx={{
-                        backgroundColor: `${getTechColor(tech)}15`,
-                        color: getTechColor(tech),
-                        fontWeight: "bold",
-                        fontSize: "0.75rem",
-                        border: `1px solid ${getTechColor(tech)}30`,
-                        "&:hover": {
-                          backgroundColor: `${getTechColor(tech)}25`,
-                          transform: "scale(1.05)",
-                        },
-                      }}
-                    />
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <Chip
-                      label={`+${project.technologies.length - 3}`}
-                      size="small"
-                      sx={{
-                        backgroundColor: theme.palette.mode === 'dark'
-                          ? "rgba(255,255,255,0.1)"
-                          : `rgba(${theme.palette.primary.main.replace('#', '')}, 0.1)`,
-                        color: theme.palette.primary.main,
-                        fontWeight: "bold",
-                      }}
-                    />
-                  )}
-                </Box>
-              </CardContent>
-
-              <CardActions
-                sx={{
-                  p: 3,
-                  pt: 0,
-                  gap: 1,
-                }}
-              >
-                {project.previewEnabled && (
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="primary"
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    startIcon={<Launch />}
-                    sx={{
-                      borderRadius: 2,
-                      textTransform: "none",
-                      fontWeight: "bold",
-                      "&:hover": {
-                        transform: "translateY(-2px)",
-                        boxShadow: `0 8px 20px ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : `rgba(${theme.palette.primary.main.replace('#', '')}, 0.3)`}`,
-                      },
-                    }}
-                  >
-                    {t("modal.viewDemo")}
-                  </Button>
-                )}
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  href={project.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  startIcon={<GitHub />}
-                  sx={{
-                    borderRadius: 2,
-                    textTransform: "none",
-                    fontWeight: "bold",
-                    ml: project.previewEnabled ? "auto" : 0,
-                    "&:hover": {
-                      transform: "translateY(-2px)",
-                      boxShadow: `0 8px 20px ${theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.15)' : `rgba(${theme.palette.primary.main.replace('#', '')}, 0.4)`}`,
-                    },
-                  }}
-                >
-                  {t("modal.viewRepo")}
-                </Button>
-              </CardActions>
-            </Card>
+                  {renderProjectCard(project, index)}
+                </ElectricBorder>
+              ) : (
+                renderProjectCard(project, index)
+              )}
+            </Box>
           ))}
         </Box>
       </Container>

@@ -1,5 +1,5 @@
 import { Box, Container, Typography, Paper, useTheme } from "@mui/material"
-import { Work, School, LocationOn, CalendarMonth } from "@mui/icons-material"
+import { Work, School, CalendarMonth } from "@mui/icons-material"
 import { useTranslation } from "react-i18next"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
@@ -104,14 +104,11 @@ const About = () => {
     { label: t("about.stats.technologies"), value: 27, suffix: "+" }
   ]
 
-  const glassStyle = {
-    background: theme.palette.mode === 'dark'
-      ? "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%)"
-      : "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)",
-    backdropFilter: "blur(10px)",
-    border: theme.palette.mode === 'dark'
-      ? "1px solid rgba(255,255,255,0.1)"
-      : "1px solid rgba(229, 57, 53, 0.1)",
+  const cardStyle = {
+    backgroundColor: "background.paper",
+    border: "1px solid",
+    borderColor: "divider",
+    boxShadow: "none",
   }
 
   return (
@@ -119,18 +116,20 @@ const About = () => {
       id="about"
       ref={sectionRef}
       sx={{
-        py: 10,
+        py: { xs: 9, md: 13 },
         position: 'relative',
         overflow: 'hidden',
+        borderBottom: "1px solid",
+        borderColor: "divider",
         '&::before': {
           content: '""',
           position: 'absolute',
           top: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '200px',
-          height: '4px',
-          background: 'linear-gradient(90deg, transparent, #e53935, transparent)',
+          width: '120px',
+          height: '1px',
+          backgroundColor: 'primary.main',
         }
       }}
     >
@@ -141,24 +140,19 @@ const About = () => {
             variant="h3"
             component="h2"
             gutterBottom
-            fontWeight="bold"
             sx={{
-              background: 'linear-gradient(45deg, #e53935 30%, #ff6f60 90%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              color: "text.primary",
               mb: 2,
               position: 'relative',
               '&::after': {
                 content: '""',
                 position: 'absolute',
-                bottom: -10,
+                bottom: -12,
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '60px',
-                height: '4px',
-                background: '#e53935',
-                borderRadius: '2px'
+                width: '36px',
+                height: '1px',
+                background: 'primary.main',
               }
             }}
           >
@@ -219,7 +213,7 @@ const About = () => {
                 component="div"
                 sx={{
                   fontWeight: 'bold',
-                  color: 'primary.main',
+                  color: 'text.primary',
                   mb: 1
                 }}
               >
@@ -244,7 +238,8 @@ const About = () => {
           sx={{
             textAlign: 'center',
             mb: 6,
-            color: 'text.primary'
+            color: 'text.primary',
+            fontSize: { xs: "1.55rem", md: "2rem" },
           }}
         >
           <Work sx={{ mr: 1, verticalAlign: 'middle', color: '#e53935' }} />
@@ -266,7 +261,7 @@ const About = () => {
               left: { xs: '20px', md: '50%' },
               transform: { xs: 'none', md: 'translateX(-50%)' },
               width: '2px',
-              background: '#e53935'
+              background: theme.palette.divider
             }
           }}
         >
@@ -294,9 +289,10 @@ const About = () => {
                     transform: { xs: 'none', md: 'translateX(-50%)' },
                     width: '12px',
                     height: '12px',
-                    borderRadius: '50%',
-                    background: '#e53935',
+                    borderRadius: 0.75,
+                    background: theme.palette.background.paper,
                     border: `2px solid ${theme.palette.background.default}`,
+                    outline: `1px solid ${theme.palette.primary.main}`,
                     zIndex: 1,
                     top: '24px'
                   }}
@@ -308,24 +304,24 @@ const About = () => {
                   sx={{
                     p: 3,
                     width: { xs: '100%', md: 'calc(50% - 40px)' },
-                    borderRadius: 3,
-                    ...glassStyle,
-                    transition: 'all 0.3s ease',
+                    borderRadius: 1.5,
+                    ...cardStyle,
+                    transition: 'transform 0.2s ease, border-color 0.2s ease',
                     '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: '0 8px 24px rgba(229, 57, 53, 0.15)'
+                      transform: 'translateY(-2px)',
+                      borderColor: "primary.main",
                     }
                   }}
                 >
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-                    <IconComponent sx={{ color: '#e53935', fontSize: '1.2rem' }} />
+                    <IconComponent sx={{ color: 'primary.main', fontSize: '1.2rem' }} />
                     <Typography variant="subtitle1" fontWeight="bold" color="text.primary">
                       {t(`about.experience.${exp.key}.company`)}
                     </Typography>
                   </Box>
                   <Typography
                     variant="body1"
-                    sx={{ color: '#e53935', fontWeight: 600, mb: 0.5 }}
+                    sx={{ color: 'primary.main', fontWeight: 650, mb: 0.5 }}
                   >
                     {t(`about.experience.${exp.key}.role`)}
                   </Typography>
@@ -352,7 +348,8 @@ const About = () => {
           sx={{
             textAlign: 'center',
             mb: 4,
-            color: 'text.primary'
+            color: 'text.primary',
+            fontSize: { xs: "1.55rem", md: "2rem" }
           }}
         >
           <School sx={{ mr: 1, verticalAlign: 'middle', color: '#e53935' }} />
@@ -378,24 +375,24 @@ const About = () => {
                 p: 3,
                 flex: { xs: '1 1 100%', md: '1 1 calc(33.333% - 24px)' },
                 minWidth: '250px',
-                borderRadius: 3,
-                ...glassStyle,
-                transition: 'all 0.3s ease',
+                borderRadius: 1.5,
+                ...cardStyle,
+                transition: 'transform 0.2s ease, border-color 0.2s ease',
                 '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 8px 24px rgba(229, 57, 53, 0.15)'
+                  transform: 'translateY(-2px)',
+                  borderColor: "primary.main",
                 }
               }}
             >
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-                <School sx={{ color: '#e53935', fontSize: '1.2rem' }} />
+                <School sx={{ color: 'primary.main', fontSize: '1.2rem' }} />
                 <Typography variant="subtitle1" fontWeight="bold" color="text.primary">
                   {t(`about.education.${edu.key}.institution`)}
                 </Typography>
               </Box>
               <Typography
                 variant="body1"
-                sx={{ color: '#e53935', fontWeight: 600 }}
+                sx={{ color: 'primary.main', fontWeight: 650 }}
               >
                 {t(`about.education.${edu.key}.degree`)}
               </Typography>

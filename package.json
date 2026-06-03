@@ -12,17 +12,20 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@gsap/react": "^2.1.2",
     "@mui/icons-material": "^7.1.1",
     "@mui/material": "^7.1.1",
     "@types/gsap": "^1.20.2",
     "boxicons": "^2.1.4",
-    "gsap": "^3.13.0",
+    "gsap": "^3.15.0",
     "i18next": "^25.2.1",
     "i18next-browser-languagedetector": "^8.2.0",
+    "ogl": "^1.0.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.5.3",
     "swiper": "^11.2.8",
+    "three": "^0.167.1",
     "wouter": "^3.7.1"
   },
   "devDependencies": {

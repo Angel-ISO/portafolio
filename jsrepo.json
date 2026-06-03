@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/jsrepo@latest/schemas/project-config.json",
+  "paths": {
+    "registry:component": "src/component",
+    "component": "src/component",
+    "components": "src/component",
+    "css": "src/component",
+    "utils": "src/utils",
+    "hooks": "src/hooks"
+  }
+}

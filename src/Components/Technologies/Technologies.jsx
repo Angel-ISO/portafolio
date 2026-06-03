@@ -29,10 +29,10 @@ const Technologies = () => {
   }
 
   const categoryColors = {
-    frontend: "#61DAFB", 
-    backend: "#68A063", 
-    database: "#336791", 
-    tools: "#F05032" 
+    frontend: "#1f6c9f",
+    backend: "#346538",
+    database: "#6a4a91",
+    tools: "#956400"
   }
 
   const getTechCategory = (techName) => {
@@ -104,18 +104,20 @@ const Technologies = () => {
       id="technologies"
       ref={sectionRef}
       sx={{ 
-        py: 10,
+        py: { xs: 9, md: 13 },
         position: 'relative',
         overflow: 'hidden',
+        borderBottom: "1px solid",
+        borderColor: "divider",
         '&::before': {
           content: '""',
           position: 'absolute',
           top: 0,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: '200px',
-          height: '4px',
-          background: 'linear-gradient(90deg, transparent, #e53935, transparent)',
+          width: '120px',
+          height: '1px',
+          backgroundColor: 'primary.main',
         }
       }}
     >
@@ -125,25 +127,19 @@ const Technologies = () => {
             variant="h3" 
             component="h2" 
             gutterBottom 
-            fontWeight="bold"
             sx={{
-              background: 'linear-gradient(45deg, #e53935 30%, #ff6f60 90%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              
+              color: "text.primary",
               mb: 2,
               position: 'relative',
               '&::after': {
                 content: '""',
                 position: 'absolute',
-                bottom: -10,
+                bottom: -12,
                 left: '50%',
                 transform: 'translateX(-50%)',
-                width: '60px',
-                height: '4px',
-                background: '#e53935',
-                borderRadius: '2px'
+                width: '36px',
+                height: '1px',
+                background: 'primary.main',
               }
             }}
           >
@@ -187,7 +183,7 @@ const Technologies = () => {
                 component="div" 
                 sx={{ 
                   fontWeight: 'bold',
-                  color: 'primary.main',
+                  color: 'text.primary',
                   mb: 1
                 }}
               >
@@ -273,11 +269,11 @@ const Technologies = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       position: 'relative',
-                      background: 'transparent',
-                      backdropFilter: 'blur(10px)',
-                      border: `2px solid ${techColor}20`,
-                      borderRadius: 3,
-                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                      backgroundColor: 'background.paper',
+                      border: '1px solid',
+                      borderColor: 'divider',
+                      borderRadius: 1.5,
+                      transition: 'transform 0.2s ease, border-color 0.2s ease',
                       cursor: 'pointer',
                       overflow: 'hidden',
                       '&::before': {
@@ -286,26 +282,25 @@ const Technologies = () => {
                         top: 0,
                         left: 0,
                         right: 0,
-                        height: '4px',
+                        height: '2px',
                         background: techColor,
                         transform: 'scaleX(0)',
                         transformOrigin: 'left',
                         transition: 'transform 0.3s ease'
                       },
                       '&:hover': {
-                        transform: 'translateY(-8px) scale(1.02)',
-                        boxShadow: `0 20px 40px ${techColor}30`,
+                        transform: 'translateY(-3px)',
                         borderColor: techColor,
                         '&::before': {
                           transform: 'scaleX(1)'
                         },
                         '& .tech-icon': {
-                          transform: 'scale(1.1) rotate(5deg)',
+                          transform: 'translateY(-2px)',
                           color: techColor
                         },
                         '& .tech-name': {
                           color: techColor,
-                          fontWeight: 'bold'
+                          fontWeight: 650
                         }
                       }
                     }}
@@ -321,7 +316,7 @@ const Technologies = () => {
                         height: '18px',
                         backgroundColor: `${techColor}15`,
                         color: techColor,
-                        fontWeight: 600,
+                        fontWeight: 650,
                         opacity: 0.7
                       }}
                     />
@@ -332,7 +327,7 @@ const Technologies = () => {
                         fontSize: "44px",
                         color: techColor,
                         marginBottom: '12px',
-                        transition: 'all 0.3s ease',
+                        transition: 'transform 0.2s ease, color 0.2s ease',
                       }}
                     />
                     
@@ -342,7 +337,7 @@ const Technologies = () => {
                       sx={{ 
                         fontWeight: 600,
                         color: 'text.primary',
-                        transition: 'all 0.3s ease',
+                        transition: 'color 0.2s ease',
                         fontSize: '1.1rem'
                       }}
                     >
